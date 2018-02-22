@@ -2,10 +2,16 @@ Team 8:
 
 The project we are planning to do is gradient editing, or called Poisson cloning, except for the basic gradient copy-paste, we will also implement some bells and whistles like doing in log domain and mixed gradient. The reason why we choose this project is that we already have got some knowledge from the lecture, so I believe it will not beyond our capability, plus, there are some improvements we can do about it, which would be a bit of challenge for us.
 
-So this project will have roughly 4 tasks:
+So this project will have roughly these tasks:
 1. Guided interpolation, a particular membrane interpolation used for seamless cloning.
 2. Importing gradient, which is taken directly from a source image.
 3. Mixing gradients, which is used to add objects with holes.
 4. Working in Log domain.
+
+potential extensions:
+5. Texture flattening, which washes out the texture of selected region.
+6. Local illumination changes, which modifies local illumination of an HDR image or just ordinary image.
+7. Local color changes
+8. Seamless tiling
 
 Since we are only having two team members, these tasks can be divided to each person equally.
