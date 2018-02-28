@@ -55,10 +55,10 @@ void test_1D() {
 
 
 void test_2D() {
-    const FloatImage imSrc(DATA_DIR "/input/cat_small.png");
-    const FloatImage imDes(DATA_DIR "/input/test_small.png");
-    const FloatImage maskSrc(DATA_DIR "/input/cat_small_mask.png");
-    const FloatImage maskDes(DATA_DIR "/input/test_small_mask.png");
+    const FloatImage imSrc(DATA_DIR "/input/cat.png");
+    const FloatImage imDes(DATA_DIR "/input/test.png");
+    const FloatImage maskSrc(DATA_DIR "/input/cat_mask.png");
+    const FloatImage maskDes(DATA_DIR "/input/test_mask.png");
 
 
 //    const FloatImage test(2, 2, 1);

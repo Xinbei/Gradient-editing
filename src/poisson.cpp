@@ -69,12 +69,13 @@ SparseMatrix<float> getA_2D(const FloatImage &maskDes) {
 
 
     // testing purpose, just identity matrix
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            if (i == j)
-                A.coeffRef(i,j) = 1.0f;
-        }
-    }
+    A.setIdentity();
+//    for (int i = 0; i < N; i++) {
+//        for (int j = 0; j < N; j++) {
+//            if (i == j)
+//                A.coeffRef(i,j) = 1.0f;
+//        }
+//    }
 
     return A;
 }
