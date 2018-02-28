@@ -62,22 +62,38 @@ SparseMatrix<float> getA_2D(const FloatImage &maskDes) {
     int N = maskDes.width() * maskDes.height(); // CHANGE ME
     SparseMatrix<float> A(N, N);
 
-    // find maskDes != white
-    // if in mask, Aij = 4 if i == j
-    // Aij = -1 if i is neighbor of j
-    // everything else is zero
+    // identity matrix
+    A.setIdentity();
 
-
-    // testing purpose, just identity matrix
     // https://eigen.tuxfamily.org/dox/group__SparseQuickRefPage.html
     vector<Triplet<float>> tripletList;
     for (int i = 0; i < maskDes.width(); i++) {
         for (int j = 0; j < maskDes.height(); j++) {
-            int d = j * maskDes.width() + i;
-            tripletList.push_back(Triplet<float>(d, d, 1.0f));
+            if (maskDes(i, j, 0) < 0.5f) { // if is not white
+                int d = j * maskDes.width() + i;
+                tripletList.push_back(Triplet<float>(d, d, -4.0f));
+
+                // for each neighbor (i+1, j), (i-1, j), (i, j-1), (i, j+1), check if in mask
+                int n;
+                n = j * maskDes.width() + (i+1);
+                if (maskDes(i+1, j, 0) < 0.5f)
+                    tripletList.push_back(Triplet<float>(d, n, 1.0f));
+
+                n = j * maskDes.width() + (i-1);
+                if (maskDes(i-1, j, 0) < 0.5f)
+                    tripletList.push_back(Triplet<float>(d, n, 1.0f));
+
+                n = (j+1) * maskDes.width() + i;
+                if (maskDes(i, j+1, 0) < 0.5f)
+                    tripletList.push_back(Triplet<float>(d, n, 1.0f));
+
+                n = (j-1) * maskDes.width() + i;
+                if (maskDes(i, j-1, 0) < 0.5f)
+                    tripletList.push_back(Triplet<float>(d, n, 1.0f));
+            }
         }
     }
-    A.setFromTriplets(tripletList.begin(), tripletList.end());
+//    A.setFromTriplets(tripletList.begin(), tripletList.end());
 
     return A;
 }
@@ -96,10 +112,54 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatIm
     //        + neighbor imDes(i, j) if neighbor is on the boundary
 
 
+    int offset_x = 0;
+    int offset_y = 0;
+
+    for (int i = 0; i < maskSrc.width(); i++) {
+        for (int j = 0; j < maskSrc.height(); j++) {
+            if (maskSrc(i, j, channel) < 0.5) {
+                offset_x += i;
+                offset_y += j;
+                goto finish1;
+            }
+        }
+    }
+    finish1:
+
+    for (int i = 0; i < maskDes.width(); i++) {
+        for (int j = 0; j < maskDes.height(); j++) {
+            if (maskDes(i, j, channel) < 0.5) {
+                offset_x -= i;
+                offset_y -= j;
+                goto finish2;
+            }
+        }
+    }
+    finish2:
+
     // testing purpose, just return the original image
     for (int i = 0; i < imDes.width(); i++) {
         for (int j = 0; j < imDes.height(); j++) {
-            b(j * imDes.width() + i) = imDes(i, j, channel);
+            int d = j * maskDes.width() + i;
+            if (maskDes(i, j, channel) < 0.5f) { // if is not white
+                b(d) = imSrc.smartAccessor(i+offset_x, j+offset_y, channel);
+//                b(d) = - 4 * imSrc.smartAccessor(i, j, channel) +
+//                        imSrc.smartAccessor(i+1+offset_x, j+offset_y, channel) +
+//                        imSrc.smartAccessor(i-1+offset_x, j+offset_y, channel) +
+//                        imSrc.smartAccessor(i+offset_x, j+1+offset_y, channel) +
+//                        imSrc.smartAccessor(i+offset_x, j-1+offset_y, channel);
+//                if (maskDes(i+1, j, channel) > 0.5f)
+//                    b(d) += imDes(i+1, j, channel);
+//                if (maskDes(i-1, j, channel) > 0.5f)
+//                    b(d) += imDes(i-1, j, channel);
+//                if (maskDes(i, j+1, channel) > 0.5f)
+//                    b(d) += imDes(i, j+1, channel);
+//                if (maskDes(i, j-1, channel) > 0.5f)
+//                    b(d) += imDes(i, j-1, channel);
+            }
+            else {
+                b(d) = imDes(i, j, channel);
+            }
         }
     }
     return b;
@@ -115,9 +175,6 @@ FloatImage solve_2D(const FloatImage &imDes, const SparseMatrix<float> &A, const
     solver.compute(A);
     VectorXf x = solver.solve(b);
 
-    // CHANGE ME
-    // x is only the pixel value inside the mask
-    // testing purpose, x = all pixel value
     for (int i = 0; i < imDes.width(); i++) {
         for (int j = 0; j < imDes.height(); j++) {
             result(j * imDes.width() + i) = x(j * imDes.width() + i);

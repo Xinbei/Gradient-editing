@@ -64,7 +64,7 @@ void test_2D() {
 //    const FloatImage test(2, 2, 1);
 //    SparseMatrix<float> A = getA_2D(test);
 //    cout << MatrixXd(A) << endl;
-
+//    VectorXf br = getB_2D(imSrc, imDes, maskSrc, maskDes, 0);
 
 
     FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes);
