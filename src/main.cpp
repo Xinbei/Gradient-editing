@@ -84,12 +84,6 @@ void test() {
     cg.compute(A);
     VectorXf x = cg.solve(b);
 
-
-//    SimplicialLDLT<SparseMatrix<float>, Lower, AMDOrdering<int> > solver;
-//    timer.reset();
-//    solver.compute(A);
-//    VectorXf x = solver.solve(b);
-
     printf("ConjugateGradient took %3.5f seconds\n", timer.elapsed()/1000.f);
     float relative_error = (A*x - b).norm(); // norm() is L2 norm
     cout << "The relative error is:\n" << relative_error << endl;

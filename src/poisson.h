@@ -1,7 +1,5 @@
-
 #ifndef FINAL_POISSON_H
 #define FINAL_POISSON_H
-
 
 #include "floatimage.h"
 #include <iostream>
@@ -22,7 +20,6 @@ FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const Fl
 SparseMatrix<float> getA_2D(const FloatImage &maskDes);
 VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes, int channel);
 FloatImage solve_2D(const FloatImage &imDes, const SparseMatrix<float> &A, const VectorXf &b, const FloatImage &maskDes);
-
 
 
 // 1D case
