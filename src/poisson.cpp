@@ -105,14 +105,6 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatIm
     VectorXf b(N);
 
     // find the offset of mask source and mask destination
-
-    // build vector b
-    // 1. if maskDes(i, j) != white, add into b
-    // 2. b = - 4 imSrc(i+offset,j+offset) + imSrc(i-1+offset, j+offset) + imSrc(i+1+offset, j+offset)
-    //                                      + imSrc(i+offset, j-1+offset) + imSrc(i+offset, j+1+offset)
-    //        + neighbor imDes(i, j) if neighbor is on the boundary
-
-
     int offset_x = 0;
     int offset_y = 0;
 
@@ -138,6 +130,7 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatIm
     }
     finish2:
 
+    // build vector b using the gradient
     FloatImage gradientSrc = laplacian(imSrc);
 
     // testing purpose, just return the original image
