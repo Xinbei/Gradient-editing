@@ -55,20 +55,19 @@ void test_1D() {
 
 
 void test_2D() {
-    const FloatImage imSrc(DATA_DIR "/input/cat.png");
-    const FloatImage imDes(DATA_DIR "/input/test.png");
-    const FloatImage maskSrc(DATA_DIR "/input/cat_mask.png");
-    const FloatImage maskDes(DATA_DIR "/input/test_mask.png");
+    const FloatImage imSrc(DATA_DIR "/input/bear.png");
+    const FloatImage imDes(DATA_DIR "/input/pool.png");
+    const FloatImage maskSrc(DATA_DIR "/input/bear_mask.png");
+    const FloatImage maskDes(DATA_DIR "/input/pool_mask.png");
 
-
-//    const FloatImage test(2, 2, 1);
+//    laplacian(imSrc).write(DATA_DIR "/output/test.png");
+//    const FloatImage test(DATA_DIR "/input/small.png");
 //    SparseMatrix<float> A = getA_2D(test);
 //    cout << MatrixXd(A) << endl;
 //    VectorXf br = getB_2D(imSrc, imDes, maskSrc, maskDes, 0);
 
-
     FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes);
-    blend.write(DATA_DIR "/output/blend.png");
+    blend.write(DATA_DIR "/output/blend_bear.png");
 }
 
 

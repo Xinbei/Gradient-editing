@@ -12,7 +12,7 @@ using namespace std;
 using namespace Eigen;
 
 
-FloatImage gradient(const FloatImage &im, bool clamp=true);
+FloatImage laplacian (const FloatImage &im, bool clamp=true);
 
 
 // 2D case

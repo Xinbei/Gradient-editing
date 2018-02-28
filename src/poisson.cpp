@@ -62,38 +62,39 @@ SparseMatrix<float> getA_2D(const FloatImage &maskDes) {
     int N = maskDes.width() * maskDes.height(); // CHANGE ME
     SparseMatrix<float> A(N, N);
 
-    // identity matrix
-    A.setIdentity();
-
     // https://eigen.tuxfamily.org/dox/group__SparseQuickRefPage.html
     vector<Triplet<float>> tripletList;
     for (int i = 0; i < maskDes.width(); i++) {
         for (int j = 0; j < maskDes.height(); j++) {
             if (maskDes(i, j, 0) < 0.5f) { // if is not white
                 int d = j * maskDes.width() + i;
-                tripletList.push_back(Triplet<float>(d, d, -4.0f));
+                tripletList.push_back(Triplet<float>(d, d, 4.0f));
 
                 // for each neighbor (i+1, j), (i-1, j), (i, j-1), (i, j+1), check if in mask
                 int n;
                 n = j * maskDes.width() + (i+1);
-                if (maskDes(i+1, j, 0) < 0.5f)
-                    tripletList.push_back(Triplet<float>(d, n, 1.0f));
+                if (maskDes.smartAccessor(i+1, j, 0) < 0.5f && i+1 < maskDes.width())
+                    tripletList.push_back(Triplet<float>(d, n, -1.0f));
 
                 n = j * maskDes.width() + (i-1);
-                if (maskDes(i-1, j, 0) < 0.5f)
-                    tripletList.push_back(Triplet<float>(d, n, 1.0f));
+                if (maskDes.smartAccessor(i-1, j, 0) < 0.5f && i-1 >= 0)
+                    tripletList.push_back(Triplet<float>(d, n, -1.0f));
 
                 n = (j+1) * maskDes.width() + i;
-                if (maskDes(i, j+1, 0) < 0.5f)
-                    tripletList.push_back(Triplet<float>(d, n, 1.0f));
+                if (maskDes.smartAccessor(i, j+1, 0) < 0.5f && j+1 < maskDes.height())
+                    tripletList.push_back(Triplet<float>(d, n, -1.0f));
 
                 n = (j-1) * maskDes.width() + i;
-                if (maskDes(i, j-1, 0) < 0.5f)
-                    tripletList.push_back(Triplet<float>(d, n, 1.0f));
+                if (maskDes.smartAccessor(i, j-1, 0) < 0.5f && j-1 >= 0)
+                    tripletList.push_back(Triplet<float>(d, n, -1.0f));
+            }
+            else {
+                int d = j * maskDes.width() + i;
+                tripletList.push_back(Triplet<float>(d, d, 1.0f));
             }
         }
     }
-//    A.setFromTriplets(tripletList.begin(), tripletList.end());
+    A.setFromTriplets(tripletList.begin(), tripletList.end());
 
     return A;
 }
@@ -137,25 +138,26 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatIm
     }
     finish2:
 
+    FloatImage gradientSrc = laplacian(imSrc);
+
     // testing purpose, just return the original image
     for (int i = 0; i < imDes.width(); i++) {
         for (int j = 0; j < imDes.height(); j++) {
             int d = j * maskDes.width() + i;
             if (maskDes(i, j, channel) < 0.5f) { // if is not white
-                b(d) = imSrc.smartAccessor(i+offset_x, j+offset_y, channel);
-//                b(d) = - 4 * imSrc.smartAccessor(i, j, channel) +
-//                        imSrc.smartAccessor(i+1+offset_x, j+offset_y, channel) +
-//                        imSrc.smartAccessor(i-1+offset_x, j+offset_y, channel) +
-//                        imSrc.smartAccessor(i+offset_x, j+1+offset_y, channel) +
-//                        imSrc.smartAccessor(i+offset_x, j-1+offset_y, channel);
-//                if (maskDes(i+1, j, channel) > 0.5f)
-//                    b(d) += imDes(i+1, j, channel);
-//                if (maskDes(i-1, j, channel) > 0.5f)
-//                    b(d) += imDes(i-1, j, channel);
-//                if (maskDes(i, j+1, channel) > 0.5f)
-//                    b(d) += imDes(i, j+1, channel);
-//                if (maskDes(i, j-1, channel) > 0.5f)
-//                    b(d) += imDes(i, j-1, channel);
+
+                // b = gradient of source image
+                b(d) = gradientSrc.smartAccessor(i+offset_x, j+offset_y, channel);
+
+                // add boundary condition
+                if (maskDes.smartAccessor(i+1, j, 0) > 0.5f && i+1 < maskDes.width())
+                    b(d) += imDes(i+1, j, channel);
+                if (maskDes.smartAccessor(i-1, j, 0) > 0.5f && i-1 >= 0)
+                    b(d) += imDes(i-1, j, channel);
+                if (maskDes.smartAccessor(i, j+1, 0) > 0.5f && j+1 < maskDes.height())
+                    b(d) += imDes(i, j+1, channel);
+                if (maskDes.smartAccessor(i, j-1, 0) > 0.5f && j-1 >= 0)
+                    b(d) += imDes(i, j-1, channel);
             }
             else {
                 b(d) = imDes(i, j, channel);
@@ -278,6 +280,18 @@ FloatImage solve_1D(const FloatImage &imDes, const MatrixXf &A, const VectorXf &
 
 
 
+
+
+FloatImage laplacian (const FloatImage &im, bool clamp) {
+    Filter lapla(3, 3);
+    lapla(0,0) =  0.0f; lapla(1,0) = -1.0f; lapla(2,0) =  0.0f;
+    lapla(0,1) = -1.0f; lapla(1,1) =  4.0f; lapla(2,1) = -1.0f;
+    lapla(0,2) =  0.0f; lapla(1,2) = -1.0f; lapla(2,2) =  0.0f;
+
+    FloatImage imFilter = lapla.Convolve(im, clamp);
+
+    return imFilter;
+}
 
 
 
