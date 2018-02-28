@@ -1,0 +1,6 @@
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/CMakeFiles/common_lib.dir
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/CMakeFiles/final.dir
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/src/ext/CMakeFiles/edit_cache.dir
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/src/ext/CMakeFiles/rebuild_cache.dir
