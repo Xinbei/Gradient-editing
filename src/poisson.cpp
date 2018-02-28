@@ -69,13 +69,15 @@ SparseMatrix<float> getA_2D(const FloatImage &maskDes) {
 
 
     // testing purpose, just identity matrix
-    A.setIdentity();
-//    for (int i = 0; i < N; i++) {
-//        for (int j = 0; j < N; j++) {
-//            if (i == j)
-//                A.coeffRef(i,j) = 1.0f;
-//        }
-//    }
+    // https://eigen.tuxfamily.org/dox/group__SparseQuickRefPage.html
+    vector<Triplet<float>> tripletList;
+    for (int i = 0; i < maskDes.width(); i++) {
+        for (int j = 0; j < maskDes.height(); j++) {
+            int d = j * maskDes.width() + i;
+            tripletList.push_back(Triplet<float>(d, d, 1.0f));
+        }
+    }
+    A.setFromTriplets(tripletList.begin(), tripletList.end());
 
     return A;
 }
