@@ -66,7 +66,7 @@ void test_2D() {
 //    cout << MatrixXd(A) << endl;
 //    VectorXf br = getB_2D(imSrc, imDes, maskSrc, maskDes, 0);
 
-    FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes);
+    FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, true);
     blend.write(DATA_DIR "/output/blend_bear.png");
 }
 

@@ -1,0 +1,940 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		949EEFE8C69441BC89F75677 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C8A52524AF774824A37B0759 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				760DD91420A64A2487DD94B3 /* CMake Rules */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		B05C0EDBF0B8435E9DD60492 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 87825D044FF34688BB5424BA /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				84DEA5F89CA3464E8644904B /* CMake Rules */,
+			);
+			dependencies = (
+				CC060578B45F4760A7CAA1E0 /* PBXTargetDependency */,
+				D9ED903369914B3DAFDC569D /* PBXTargetDependency */,
+				ED1C2CD8E00640CD85225E3E /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		39A1DF1B46F84391913066D2 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/floatimage.h */ = {isa = PBXBuildFile; fileRef = 4BEF9A31E59F4CD194002657 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/floatimage.h */; };
+		442DD00FDCD7439DA12CE2CA /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/exceptions.h */ = {isa = PBXBuildFile; fileRef = CDE14AC59A154FFE82998C01 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/exceptions.h */; };
+		54465256010E4E53829A86B4 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/main.cpp */ = {isa = PBXBuildFile; fileRef = 08ECFCB7A4424DD8BA7BEAB2 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/main.cpp */; };
+		572E249E288A4388BEB0C255 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 8A58E5F7989E4C58A21466EC /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */; };
+		5CFBC3940D85430A84295E9A /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb/stb_image.h */ = {isa = PBXBuildFile; fileRef = E65D915FDD9A4E77A5800046 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb/stb_image.h */; };
+		6151417CD0E447DD9B8D28A8 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/filtering.cpp */ = {isa = PBXBuildFile; fileRef = EBD3878A92AE4DB48248A176 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/filtering.cpp */; };
+		734972D3EB2C455891445A01 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/a2.cpp */ = {isa = PBXBuildFile; fileRef = F0E396B096EA4E69AD4422A4 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/a2.cpp */; };
+		9AD1D32109634C91AC061B4D /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/array3D.h */ = {isa = PBXBuildFile; fileRef = 853EB04A91EE48D0B22F0E4F /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/array3D.h */; };
+		A286AFA4330D46ACA7956EA0 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/utils.h */ = {isa = PBXBuildFile; fileRef = 5C5C3A01DB8646309205F039 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/utils.h */; };
+		B5C6719272C849EB9BC1C265 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/floatimage.cpp */ = {isa = PBXBuildFile; fileRef = A87F373F727B42C4BB64688F /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/floatimage.cpp */; };
+		C98BC5B9741C4C3F9CA32518 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb/stb_image_write.h */ = {isa = PBXBuildFile; fileRef = F6E097AE26434795A40DC5E6 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb/stb_image_write.h */; };
+		DC76E883D45E40C7A99B49A0 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/poisson.h */ = {isa = PBXBuildFile; fileRef = 24F3E348FD324EC78B5A5EB9 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/poisson.h */; };
+		E087354B71B84AB299A449BD /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/poisson.cpp */ = {isa = PBXBuildFile; fileRef = AEEC3C8E588548A0B9DA2539 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/poisson.cpp */; };
+		E9D25FDD0C3F45668820F104 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = F9C45386B25645838B3CE22D /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		7A8DFDE595A84632A50E20DA /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+		8BB20F80D20942439D95B944 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		BB9CF240F34846359077759E /* MinSizeRel */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = MinSizeRel;
+		};
+		CE31891C48F64CD4A749B7B2 /* RelWithDebInfo */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = RelWithDebInfo;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		23091682113B4619AF6C4936 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A229CEE6AFC3424E8144D9E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DB868B0F62442F49EF94641;
+			remoteInfo = common_lib;
+		};
+		30638D81B50F491EA6ED736C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A229CEE6AFC3424E8144D9E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DB868B0F62442F49EF94641;
+			remoteInfo = common_lib;
+		};
+		592518096CB94CFEAB888B08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A229CEE6AFC3424E8144D9E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 949EEFE8C69441BC89F75677;
+			remoteInfo = ZERO_CHECK;
+		};
+		684B5BF1AAD642AE89EF6DE1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A229CEE6AFC3424E8144D9E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 949EEFE8C69441BC89F75677;
+			remoteInfo = ZERO_CHECK;
+		};
+		7C8F943AF2C74501A97684D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A229CEE6AFC3424E8144D9E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47BC32DC18ED41BA9BFF1BC2;
+			remoteInfo = final;
+		};
+		A6DA32F72B7345E982C93112 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A229CEE6AFC3424E8144D9E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 949EEFE8C69441BC89F75677;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08ECFCB7A4424DD8BA7BEAB2 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
+		0D0E3288186E455FABD1CA3B /* common_lib */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libcommon_lib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		24F3E348FD324EC78B5A5EB9 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/poisson.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = poisson.h; path = src/poisson.h; sourceTree = SOURCE_ROOT; };
+		4BEF9A31E59F4CD194002657 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/floatimage.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = floatimage.h; path = src/floatimage.h; sourceTree = SOURCE_ROOT; };
+		510D877575C742ED85E8152C /* final */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = final; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C5C3A01DB8646309205F039 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/utils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = utils.h; path = src/utils.h; sourceTree = SOURCE_ROOT; };
+		5F72BAF0B028443493B82DFE /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		74E47BD8BA864DB8A0E6BCBE /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		853EB04A91EE48D0B22F0E4F /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/array3D.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = array3D.h; path = src/array3D.h; sourceTree = SOURCE_ROOT; };
+		8A58E5F7989E4C58A21466EC /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		A87F373F727B42C4BB64688F /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/floatimage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = floatimage.cpp; path = src/floatimage.cpp; sourceTree = SOURCE_ROOT; };
+		AEEC3C8E588548A0B9DA2539 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/poisson.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = poisson.cpp; path = src/poisson.cpp; sourceTree = SOURCE_ROOT; };
+		CDE14AC59A154FFE82998C01 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/exceptions.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = exceptions.h; path = src/exceptions.h; sourceTree = SOURCE_ROOT; };
+		E65D915FDD9A4E77A5800046 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb/stb_image.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = stb_image.h; path = src/ext/stb/stb_image.h; sourceTree = SOURCE_ROOT; };
+		EBD3878A92AE4DB48248A176 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/filtering.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = filtering.cpp; path = src/filtering.cpp; sourceTree = SOURCE_ROOT; };
+		F0E396B096EA4E69AD4422A4 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/a2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = a2.cpp; path = src/a2.cpp; sourceTree = SOURCE_ROOT; };
+		F6E097AE26434795A40DC5E6 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb/stb_image_write.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = stb_image_write.h; path = src/ext/stb/stb_image_write.h; sourceTree = SOURCE_ROOT; };
+		F9C45386B25645838B3CE22D /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		292A26B690244945A75F34D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0D0E3288186E455FABD1CA3B /* common_lib */,
+				510D877575C742ED85E8152C /* final */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F531EC2545549FEB0101B98 /* common_lib */ = {
+			isa = PBXGroup;
+			children = (
+				D88BF9BCAA6B4C619ADC92EF /* Header Files */,
+				52373190DFC948A1A1B15D86 /* Source Files */,
+				8D6E0359B25647BBBC24B280 /* src */,
+				8A58E5F7989E4C58A21466EC /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */,
+			);
+			name = common_lib;
+			sourceTree = "<group>";
+		};
+		52373190DFC948A1A1B15D86 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				A87F373F727B42C4BB64688F /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/floatimage.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		53046A93C52B4F3FA63CD17C /* ext */ = {
+			isa = PBXGroup;
+			children = (
+				CC0327EF69F548ABB431E026 /* stb */,
+			);
+			name = ext;
+			sourceTree = "<group>";
+		};
+		74D374AB19B84C4AAC34AAFF = {
+			isa = PBXGroup;
+			children = (
+				AB2359B244D64996BCB044E6 /* final */,
+				3F531EC2545549FEB0101B98 /* common_lib */,
+				B243CFED99C14346917E1357 /* ALL_BUILD */,
+				EBDDBB07538D4A14AB32A27D /* ZERO_CHECK */,
+				292A26B690244945A75F34D3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7E257F717BEA40C780EAE8E2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F0E396B096EA4E69AD4422A4 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/a2.cpp */,
+				EBD3878A92AE4DB48248A176 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/filtering.cpp */,
+				08ECFCB7A4424DD8BA7BEAB2 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/main.cpp */,
+				AEEC3C8E588548A0B9DA2539 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/poisson.cpp */,
+				24F3E348FD324EC78B5A5EB9 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/poisson.h */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		8D6E0359B25647BBBC24B280 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				53046A93C52B4F3FA63CD17C /* ext */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		AB2359B244D64996BCB044E6 /* final */ = {
+			isa = PBXGroup;
+			children = (
+				7E257F717BEA40C780EAE8E2 /* src */,
+				F9C45386B25645838B3CE22D /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */,
+			);
+			name = final;
+			sourceTree = "<group>";
+		};
+		B243CFED99C14346917E1357 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				B45FB553305C48D1903E28BD /* CMake Rules */,
+				74E47BD8BA864DB8A0E6BCBE /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		B45FB553305C48D1903E28BD /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		CC0327EF69F548ABB431E026 /* stb */ = {
+			isa = PBXGroup;
+			children = (
+				E65D915FDD9A4E77A5800046 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb/stb_image.h */,
+				F6E097AE26434795A40DC5E6 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb/stb_image_write.h */,
+			);
+			name = stb;
+			sourceTree = "<group>";
+		};
+		D88BF9BCAA6B4C619ADC92EF /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				853EB04A91EE48D0B22F0E4F /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/array3D.h */,
+				CDE14AC59A154FFE82998C01 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/exceptions.h */,
+				4BEF9A31E59F4CD194002657 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/floatimage.h */,
+				5C5C3A01DB8646309205F039 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/utils.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		EBDDBB07538D4A14AB32A27D /* ZERO_CHECK */ = {
+			isa = PBXGroup;
+			children = (
+				FFA1AB24F72848A49E87957C /* CMake Rules */,
+				5F72BAF0B028443493B82DFE /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/CMakeLists.txt */,
+			);
+			name = ZERO_CHECK;
+			sourceTree = "<group>";
+		};
+		FFA1AB24F72848A49E87957C /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0DB868B0F62442F49EF94641 /* common_lib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F2B314B6E6A4D7BA28FC518 /* Build configuration list for PBXNativeTarget "common_lib" */;
+			buildPhases = (
+				E47CC63088474590AA6C6EC1 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CC8C528D840A4E1498EFD413 /* PBXTargetDependency */,
+			);
+			name = common_lib;
+			productName = common_lib;
+			productReference = 0D0E3288186E455FABD1CA3B /* common_lib */;
+			productType = "com.apple.product-type.library.static";
+		};
+		47BC32DC18ED41BA9BFF1BC2 /* final */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2469CF1454144FF59400E8BB /* Build configuration list for PBXNativeTarget "final" */;
+			buildPhases = (
+				F90855EE66534239A5A8F98B /* Sources */,
+				3B36D9DA56E64412A80E1C2E /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6A348CBF8C9F488BBDB4273A /* PBXTargetDependency */,
+				B85784C32174486286DF6D3B /* PBXTargetDependency */,
+			);
+			name = final;
+			productName = final;
+			productReference = 510D877575C742ED85E8152C /* final */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A229CEE6AFC3424E8144D9E4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 0820;
+			};
+			buildConfigurationList = 15E4F04FD6DB43D58DB81CC0 /* Build configuration list for PBXProject "final" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				8BB20F80D20942439D95B944 /* Debug */,
+				7A8DFDE595A84632A50E20DA /* Release */,
+				BB9CF240F34846359077759E /* MinSizeRel */,
+				CE31891C48F64CD4A749B7B2 /* RelWithDebInfo */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = 74D374AB19B84C4AAC34AAFF;
+			projectDirPath = ../;
+			projectRoot = "";
+			targets = (
+				B05C0EDBF0B8435E9DD60492 /* ALL_BUILD */,
+				949EEFE8C69441BC89F75677 /* ZERO_CHECK */,
+				0DB868B0F62442F49EF94641 /* common_lib */,
+				47BC32DC18ED41BA9BFF1BC2 /* final */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B36D9DA56E64412A80E1C2E /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/xinbeifu/Documents/grad\\ courses/computational\\ photography/gradient\\ editing/build -f /Users/xinbeifu/Documents/grad\\ courses/computational\\ photography/gradient\\ editing/build/CMakeScripts/final_postBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		760DD91420A64A2487DD94B3 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/xinbeifu/Documents/grad\\ courses/computational\\ photography/gradient\\ editing/build -f /Users/xinbeifu/Documents/grad\\ courses/computational\\ photography/gradient\\ editing/build/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		84DEA5F89CA3464E8644904B /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/xinbeifu/Documents/grad\\ courses/computational\\ photography/gradient\\ editing/build -f /Users/xinbeifu/Documents/grad\\ courses/computational\\ photography/gradient\\ editing/build/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		ADE38CF89705400B8EAEACC0 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		E1E1B2B0ADBF41E2BBB75B61 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E47CC63088474590AA6C6EC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5C6719272C849EB9BC1C265 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/floatimage.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F90855EE66534239A5A8F98B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				734972D3EB2C455891445A01 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/a2.cpp */,
+				6151417CD0E447DD9B8D28A8 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/filtering.cpp */,
+				54465256010E4E53829A86B4 /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/main.cpp */,
+				E087354B71B84AB299A449BD /* /Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/poisson.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6A348CBF8C9F488BBDB4273A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DB868B0F62442F49EF94641 /* common_lib */;
+			targetProxy = 23091682113B4619AF6C4936 /* PBXContainerItemProxy */;
+		};
+		B85784C32174486286DF6D3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 949EEFE8C69441BC89F75677 /* ZERO_CHECK */;
+			targetProxy = 592518096CB94CFEAB888B08 /* PBXContainerItemProxy */;
+		};
+		CC060578B45F4760A7CAA1E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DB868B0F62442F49EF94641 /* common_lib */;
+			targetProxy = 30638D81B50F491EA6ED736C /* PBXContainerItemProxy */;
+		};
+		CC8C528D840A4E1498EFD413 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 949EEFE8C69441BC89F75677 /* ZERO_CHECK */;
+			targetProxy = A6DA32F72B7345E982C93112 /* PBXContainerItemProxy */;
+		};
+		D9ED903369914B3DAFDC569D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47BC32DC18ED41BA9BFF1BC2 /* final */;
+			targetProxy = 7C8F943AF2C74501A97684D3 /* PBXContainerItemProxy */;
+		};
+		ED1C2CD8E00640CD85225E3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 949EEFE8C69441BC89F75677 /* ZERO_CHECK */;
+			targetProxy = 684B5BF1AAD642AE89EF6DE1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0688F3E59A344FC1BF361575 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		0F54085633B24F87B48E29EB /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'DATA_DIR=R\"(/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/data)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = " -Wall -Wextra -Wno-unused-parameter -Wno-ignored-attributes -Wno-gnu-anonymous-struct -Wno-c99-extensions -Wno-nested-anon-types -Wno-deprecated-register     -DNDEBUG '-std=c++11' -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"   ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = common_lib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		19D805A598B3498E8D30E9F2 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		27CB0628B3C345E88E5BB231 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk;
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build/build";
+			};
+			name = Debug;
+		};
+		42B21E4D65BD4A45A4E1925E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'DATA_DIR=R\"(/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/data)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = " -Wall -Wextra -Wno-unused-parameter -Wno-ignored-attributes -Wno-gnu-anonymous-struct -Wno-c99-extensions -Wno-nested-anon-types -Wno-deprecated-register     -DNDEBUG '-std=c++11' -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"   ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = common_lib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		4CCAC7D9E72D4BA7BB834D45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		53C09501B198443DA00072B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		582CFB4064084B1FB44FF523 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		667014FD0D824A3DB8D8ECDC /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'DATA_DIR=R\"(/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/data)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = " -Wall -Wextra -Wno-unused-parameter -Wno-ignored-attributes -Wno-gnu-anonymous-struct -Wno-c99-extensions -Wno-nested-anon-types -Wno-deprecated-register        -DNDEBUG '-std=c++11' -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"   ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = common_lib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		68D09D7124F74B21AC66C1DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'DATA_DIR=R\"(/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/data)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CPLUSPLUSFLAGS = " -Wall -Wextra -Wno-unused-parameter -Wno-ignored-attributes -Wno-gnu-anonymous-struct -Wno-c99-extensions -Wno-nested-anon-types -Wno-deprecated-register    '-std=c++11' -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"   ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  \"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build/Debug/libcommon_lib.a\"";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = final;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		7AA8CBC3C0FB471F9C1659AE /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		7D07C6B31F25488799A838B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'DATA_DIR=R\"(/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/data)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CPLUSPLUSFLAGS = " -Wall -Wextra -Wno-unused-parameter -Wno-ignored-attributes -Wno-gnu-anonymous-struct -Wno-c99-extensions -Wno-nested-anon-types -Wno-deprecated-register     -DNDEBUG '-std=c++11' -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"   ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  \"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build/Release/libcommon_lib.a\"";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = final;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		80C3E87C52584CA5820DFD52 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'DATA_DIR=R\"(/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/data)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CPLUSPLUSFLAGS = " -Wall -Wextra -Wno-unused-parameter -Wno-ignored-attributes -Wno-gnu-anonymous-struct -Wno-c99-extensions -Wno-nested-anon-types -Wno-deprecated-register     -DNDEBUG '-std=c++11' -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"   ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  \"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build/MinSizeRel/libcommon_lib.a\"";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = final;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		817C3EE861F74150B4C87E67 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk;
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build/build";
+			};
+			name = MinSizeRel;
+		};
+		993414E832274DAC8AAE0C9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk;
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build/build";
+			};
+			name = Release;
+		};
+		AE445FFE438D450B8DE6A5B8 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		B5B7257D220647BC876DE476 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'DATA_DIR=R\"(/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/data)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CPLUSPLUSFLAGS = " -Wall -Wextra -Wno-unused-parameter -Wno-ignored-attributes -Wno-gnu-anonymous-struct -Wno-c99-extensions -Wno-nested-anon-types -Wno-deprecated-register        -DNDEBUG '-std=c++11' -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"   ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  \"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build/RelWithDebInfo/libcommon_lib.a\"";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = final;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		BFA59DE035DB4A798259B841 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk;
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build/build";
+			};
+			name = RelWithDebInfo;
+		};
+		DF4DDA3F0DE843C4B12C4499 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		EB8F2D7D34DC46288B22A81E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'DATA_DIR=R\"(/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/data)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\"","\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = " -Wall -Wextra -Wno-unused-parameter -Wno-ignored-attributes -Wno-gnu-anonymous-struct -Wno-c99-extensions -Wno-nested-anon-types -Wno-deprecated-register    '-std=c++11' -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/stb\" -I\"/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/src/ext/eigen\"   ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = common_lib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/xinbeifu/Documents/grad courses/computational photography/gradient editing/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		15E4F04FD6DB43D58DB81CC0 /* Build configuration list for PBXProject "final" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27CB0628B3C345E88E5BB231 /* Debug */,
+				993414E832274DAC8AAE0C9E /* Release */,
+				817C3EE861F74150B4C87E67 /* MinSizeRel */,
+				BFA59DE035DB4A798259B841 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2469CF1454144FF59400E8BB /* Build configuration list for PBXNativeTarget "final" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68D09D7124F74B21AC66C1DD /* Debug */,
+				7D07C6B31F25488799A838B8 /* Release */,
+				80C3E87C52584CA5820DFD52 /* MinSizeRel */,
+				B5B7257D220647BC876DE476 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6F2B314B6E6A4D7BA28FC518 /* Build configuration list for PBXNativeTarget "common_lib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB8F2D7D34DC46288B22A81E /* Debug */,
+				42B21E4D65BD4A45A4E1925E /* Release */,
+				0F54085633B24F87B48E29EB /* MinSizeRel */,
+				667014FD0D824A3DB8D8ECDC /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		87825D044FF34688BB5424BA /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53C09501B198443DA00072B4 /* Debug */,
+				4CCAC7D9E72D4BA7BB834D45 /* Release */,
+				AE445FFE438D450B8DE6A5B8 /* MinSizeRel */,
+				0688F3E59A344FC1BF361575 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C8A52524AF774824A37B0759 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF4DDA3F0DE843C4B12C4499 /* Debug */,
+				582CFB4064084B1FB44FF523 /* Release */,
+				19D805A598B3498E8D30E9F2 /* MinSizeRel */,
+				7AA8CBC3C0FB471F9C1659AE /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A229CEE6AFC3424E8144D9E4 /* Project object */;
+}

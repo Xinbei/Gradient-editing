@@ -6,7 +6,7 @@ using namespace std;
 
 
 
-FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes) {
+FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes, bool mixGrad) {
 
 //    // chenck mask 1 == mask 2
 //    if (maskSrc.width() != maskDes.width() || maskSrc.height() != maskDes.height())
@@ -32,9 +32,9 @@ FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const Fl
 
     // for each channels, get vector b
     printf("Vector b \n");
-    VectorXf br = getB_2D(imSrc, imDes, maskSrc, maskDes, 0);
-    VectorXf bg = getB_2D(imSrc, imDes, maskSrc, maskDes, 1);
-    VectorXf bb = getB_2D(imSrc, imDes, maskSrc, maskDes, 2);
+    VectorXf br = getB_2D(imSrc, imDes, maskSrc, maskDes, 0, mixGrad);
+    VectorXf bg = getB_2D(imSrc, imDes, maskSrc, maskDes, 1, mixGrad);
+    VectorXf bb = getB_2D(imSrc, imDes, maskSrc, maskDes, 2, mixGrad);
 
     // solve for x
     printf("Solve xr \n");
@@ -100,7 +100,7 @@ SparseMatrix<float> getA_2D(const FloatImage &maskDes) {
 }
 
 
-VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes, int channel) {
+VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes, int channel, bool mixGrad) {
     int N = maskDes.width() * maskDes.height(); // CHANGE ME
     VectorXf b(N);
 
@@ -132,7 +132,8 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatIm
 
     // build vector b using the gradient
     FloatImage gradientSrc = laplacian(imSrc);
-
+    FloatImage gradientDes = laplacian(imDes);
+    
     // testing purpose, just return the original image
     for (int i = 0; i < imDes.width(); i++) {
         for (int j = 0; j < imDes.height(); j++) {
@@ -140,7 +141,12 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatIm
             if (maskDes(i, j, channel) < 0.5f) { // if is not white
 
                 // b = gradient of source image
-                b(d) = gradientSrc.smartAccessor(i+offset_x, j+offset_y, channel);
+                float srcGrad = gradientSrc.smartAccessor(i+offset_x, j+offset_y, channel);
+                if(mixGrad){
+                    float desGrad = gradientDes.smartAccessor(i, j, channel);
+                    b(d) = desGrad > srcGrad?desGrad:srcGrad;
+                }else
+                    b(d) = srcGrad;
 
                 // add boundary condition
                 if (maskDes.smartAccessor(i+1, j, 0) > 0.5f && i+1 < maskDes.width())

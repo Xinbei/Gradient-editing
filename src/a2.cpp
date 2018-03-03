@@ -280,8 +280,8 @@ int Histogram::inverseCDF(double value) const {
 	int result = -1;
 	double min = 100;
 	for (int i = 0; i < numBins(); i++) {
-		if (abs(m_cdf[i] - value) < min) {
-			min = abs(m_cdf[i] - value);
+		if (fabs(m_cdf[i] - value) < min) {
+			min = fabs(m_cdf[i] - value);
 			result = i;
 		}
 	}
