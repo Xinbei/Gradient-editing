@@ -144,7 +144,7 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatIm
                 float srcGrad = gradientSrc.smartAccessor(i+offset_x, j+offset_y, channel);
                 if(mixGrad){
                     float desGrad = gradientDes.smartAccessor(i, j, channel);
-                    b(d) = desGrad > srcGrad?desGrad:srcGrad;
+                    b(d) = abs(desGrad) > abs(srcGrad)?desGrad:srcGrad;
                 }else
                     b(d) = srcGrad;
 
