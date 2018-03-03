@@ -133,7 +133,7 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatIm
     // build vector b using the gradient
     FloatImage gradientSrc = laplacian(imSrc);
     FloatImage gradientDes = laplacian(imDes);
-    
+
     // testing purpose, just return the original image
     for (int i = 0; i < imDes.width(); i++) {
         for (int j = 0; j < imDes.height(); j++) {
