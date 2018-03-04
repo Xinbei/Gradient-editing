@@ -19,7 +19,10 @@ FloatImage laplacian (const FloatImage &im, bool clamp=true);
 FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes, bool mixGrad=false);
 SparseMatrix<float> getA_2D(const FloatImage &maskDes);
 VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes, int channel, bool mixGrad=false);
-FloatImage solve_2D(const FloatImage &imDes, const SparseMatrix<float> &A, const VectorXf &b, const FloatImage &maskDes);
+FloatImage solve_2D(const FloatImage &imDes, const SparseMatrix<float> &A, const VectorXf &b);
+
+FloatImage textureFlattening(const FloatImage &im, const FloatImage &mask);
+VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, int channel);
 
 
 // 1D case

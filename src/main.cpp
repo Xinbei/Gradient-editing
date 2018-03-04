@@ -87,13 +87,35 @@ void test() {
     cout << "The relative error is:\n" << relative_error << endl;
 }
 
+void testTF(){
+    const FloatImage im(DATA_DIR "/input/ha-18.jpg");
+    const FloatImage mask(DATA_DIR "/input/ha-18-mask.jpg");
+//    FloatImage mask = gradientMagnitude(im);
+//    FloatImage test(mask.width(), mask.height(), 1);
+    
+//    for (int i = 0; i < mask.width(); i++) {
+//        for (int j = 0; j < mask.height(); j++) {
+//            if(mask(i, j, 0) > 0.3)
+//                test(i, j, 0) = 1;
+//            else
+//                test(i, j, 0) = 0;
+//        }
+//    }
+    
+//    test.write(DATA_DIR "/output/ha-18-mask.png");
+    
+    FloatImage flattened = textureFlattening(im,mask);
+    flattened.write(DATA_DIR "/output/ha-18-flattened.png");
+}
+
 
 
 
 int main() {
     cout << "Hello World!" << endl;
 //    try { test_1D();}   catch(...) {cout << "test_1D Failed!" << endl;}
-    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
 
 //    try { test();}   catch(...) {cout << "test Failed!" << endl;}
     cout << "END" << endl;

@@ -39,11 +39,11 @@ FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const Fl
 
     // solve for x
     printf("Solve xr \n");
-    FloatImage xr = solve_2D(imDes, A, br, maskDes);
+    FloatImage xr = solve_2D(imDes, A, br);
     printf("Solve xg \n");
-    FloatImage xg = solve_2D(imDes, A, bg, maskDes);
+    FloatImage xg = solve_2D(imDes, A, bg);
     printf("Solve xb \n");
-    FloatImage xb = solve_2D(imDes, A, bb, maskDes);
+    FloatImage xb = solve_2D(imDes, A, bb);
 
     // combine channels
     printf("Combine channels \n");
@@ -198,7 +198,7 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatI
 }
 
 
-FloatImage solve_2D(const FloatImage &imDes, const SparseMatrix<float> &A, const VectorXf &b, const FloatImage &maskDes) {
+FloatImage solve_2D(const FloatImage &imDes, const SparseMatrix<float> &A, const VectorXf &b) {
     FloatImage result(imDes.width(), imDes.height(), 1);
 
     // https://eigen.tuxfamily.org/dox/group__TutorialSparse.html
@@ -218,10 +218,88 @@ FloatImage solve_2D(const FloatImage &imDes, const SparseMatrix<float> &A, const
 
 
 
+FloatImage textureFlattening(const FloatImage &im, const FloatImage &mask){
+    
+    FloatImage flattenedIm(im);
+    
+    vector<FloatImage> rgb = {FloatImage(im.width(), im.height(), 1),
+        FloatImage(im.width(), im.height(), 1),
+        FloatImage(im.width(), im.height(), 1)};
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            rgb[0](i, j, 0) = im(i, j, 0);
+            rgb[1](i, j, 0) = im(i, j, 1);
+            rgb[2](i, j, 0) = im(i, j, 2);
+        }
+    }
+    
+    // get matrix A, same for all channels
+    printf("Matrix A \n");
+    SparseMatrix<float> A = getA_2D(mask);
+    
+    // for each channels, get vector b
+    printf("Vector b \n");
+    VectorXf br = getB_tf(im, mask, 0);
+    VectorXf bg = getB_tf(im, mask, 1);
+    VectorXf bb = getB_tf(im, mask, 2);
+    
+    // solve for x
+    printf("Solve xr \n");
+    FloatImage xr = solve_2D(im, A, br);
+    printf("Solve xg \n");
+    FloatImage xg = solve_2D(im, A, bg);
+    printf("Solve xb \n");
+    FloatImage xb = solve_2D(im, A, bb);
+    
+    // combine channels
+    printf("Combine channels \n");
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            flattenedIm(i, j, 0) = xr(i, j, 0);
+            flattenedIm(i, j, 1) = xg(i, j, 0);
+            flattenedIm(i, j, 2) = xb(i, j, 0);
+        }
+    }
+    
+    return flattenedIm;
+    
+}
 
 
+VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, int channel){
+    int N = mask.width() * mask.height(), index = 0;
+    VectorXf b(N);
+    
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            index = j * im.width() + i;
+            
+            if (mask(i, j, 0) < 0.5f) {
+                b(index) = 0.0f;
+                if (i+1 < mask.width() && mask(i+1, j, 0) > 0.5f){
+                    b(index) += im(i+1, j, channel);
+                    b(index) += im(i, j, channel) - im(i+1, j, channel);
+                }
+                if (i-1 >= 0 && mask(i-1, j, 0) > 0.5f){
+                    b(index) += im(i-1, j, channel);
+                    b(index) += im(i, j, channel) - im(i-1, j, channel);
+                }
+                if (j+1 < mask.height() && mask(i, j+1, 0) > 0.5f){
+                    b(index) += im(i, j+1, channel);
+                    b(index) += im(i, j, channel) - im(i, j+1, channel);
+                }
+                if (j-1 >= 0 && mask(i, j-1, 0) > 0.5f){
+                    b(index) += im(i, j-1, channel);
+                    b(index) += im(i, j, channel) - im(i, j-1, channel);
+                }
 
-
+            }else
+                b(index) = im(i, j, channel);
+        }
+    }
+    
+    return b;
+}
 
 
 
