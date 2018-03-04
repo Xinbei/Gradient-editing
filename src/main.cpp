@@ -60,6 +60,11 @@ void test_2D() {
     const FloatImage maskSrc(DATA_DIR "/input/animations_small_mask.png");
     const FloatImage maskDes(DATA_DIR "/input/wooden_small_mask.png");
 
+    FloatImage gradientSrc = laplacian(imSrc);
+    FloatImage gradientDes = laplacian(imDes);
+    gradientSrc.write(DATA_DIR "/output/gradientSrc.png");
+    gradientDes.write(DATA_DIR "/output/gradientDes.png");
+
     FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, true);
     blend.write(DATA_DIR "/output/blendMixed_wooden.png");
 }

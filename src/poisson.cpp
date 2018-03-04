@@ -6,7 +6,8 @@ using namespace std;
 
 
 
-FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes, bool mixGrad) {
+FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes,
+                      bool mixGrad) {
 
 //    // chenck mask 1 == mask 2
 //    if (maskSrc.width() != maskDes.width() || maskSrc.height() != maskDes.height())
@@ -100,7 +101,8 @@ SparseMatrix<float> getA_2D(const FloatImage &maskDes) {
 }
 
 
-VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes, int channel, bool mixGrad) {
+VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatImage &maskSrc, const FloatImage &maskDes,
+                 int channel, bool mixGrad) {
     int N = maskDes.width() * maskDes.height(); // CHANGE ME
     VectorXf b(N);
 
@@ -144,7 +146,7 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatIm
                 float srcGrad = gradientSrc.smartAccessor(i+offset_x, j+offset_y, channel);
                 if(mixGrad){
                     float desGrad = gradientDes.smartAccessor(i, j, channel);
-                    b(d) = abs(desGrad) > abs(srcGrad)?desGrad:srcGrad;
+                    b(d) = abs(desGrad) > abs(srcGrad) ? desGrad : srcGrad;
                 }else
                     b(d) = srcGrad;
 
