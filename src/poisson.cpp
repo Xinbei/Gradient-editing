@@ -141,22 +141,80 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatIm
             if (maskDes(i, j, channel) < 0.5f) { // if is not white
 
                 // b = gradient of source image
-                float srcGrad = gradientSrc.smartAccessor(i+offset_x, j+offset_y, channel);
-                if(mixGrad){
-                    float desGrad = gradientDes.smartAccessor(i, j, channel);
-                    b(d) = abs(desGrad) > abs(srcGrad)?desGrad:srcGrad;
-                }else
-                    b(d) = srcGrad;
+//                float srcGrad = gradientSrc.smartAccessor(i+offset_x, j+offset_y, channel);
+//                float desGrad = gradientDes.smartAccessor(i, j, channel);
+                
+//                if (mixGrad) {
+//                    b(d) = fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
+////                    b(d) = desGrad;
+//                }else
+//                    b(d) = srcGrad;
+                
+                if (i > 0) {
+                    if (maskDes.smartAccessor(i-1, j, 0) > 0.5f) {
+                        b(d) += imDes(i-1, j, channel);
+                    }
+                    
+                    float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x-1, j+offset_y, channel, true);
+                    
+                    if (mixGrad) {
+                        float desGrad = imDes(i, j, channel) - imDes(i-1, j, channel);
+                        b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
+                    }else
+                        b(d) += srcGrad;
+                }
+                
+                if (i+1 < maskDes.width()) {
+                    if (maskDes.smartAccessor(i+1, j, 0) > 0.5f) {
+                        b(d) += imDes(i+1, j, channel);
+                    }
+                    
+                    float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x+1, j+offset_y, channel, true);
+                    
+                    if (mixGrad) {
+                        float desGrad = imDes(i, j, channel) - imDes(i+1, j, channel);
+                        b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
+                    }else
+                        b(d) += srcGrad;
+                }
+                
+                if (j > 0) {
+                    if (maskDes.smartAccessor(i, j-1, 0) > 0.5f) {
+                        b(d) += imDes(i, j-1, channel);
+                    }
+                    
+                    float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x, j+offset_y-1, channel, true);
+                    
+                    if (mixGrad) {
+                        float desGrad = imDes(i, j, channel) - imDes(i, j-1, channel);
+                        b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
+                    }else
+                        b(d) += srcGrad;
+                }
+                
+                if (j+1 < maskDes.height()) {
+                    if (maskDes.smartAccessor(i, j+1, 0) > 0.5f) {
+                        b(d) += imDes(i, j+1, channel);
+                    }
+                    
+                    float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x, j+offset_y+1, channel, true);
+                    
+                    if (mixGrad) {
+                        float desGrad = imDes(i, j, channel) - imDes(i, j+1, channel);
+                        b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
+                    }else
+                        b(d) += srcGrad;
+                }
 
                 // add boundary condition
-                if (maskDes.smartAccessor(i+1, j, 0) > 0.5f && i+1 < maskDes.width())
-                    b(d) += imDes(i+1, j, channel);
-                if (maskDes.smartAccessor(i-1, j, 0) > 0.5f && i-1 >= 0)
-                    b(d) += imDes(i-1, j, channel);
-                if (maskDes.smartAccessor(i, j+1, 0) > 0.5f && j+1 < maskDes.height())
-                    b(d) += imDes(i, j+1, channel);
-                if (maskDes.smartAccessor(i, j-1, 0) > 0.5f && j-1 >= 0)
-                    b(d) += imDes(i, j-1, channel);
+//                if (maskDes.smartAccessor(i+1, j, 0) > 0.5f && i+1 < maskDes.width())
+//                    b(d) += imDes(i+1, j, channel);
+//                if (maskDes.smartAccessor(i-1, j, 0) > 0.5f && i-1 >= 0)
+//                    b(d) += imDes(i-1, j, channel);
+//                if (maskDes.smartAccessor(i, j+1, 0) > 0.5f && j+1 < maskDes.height())
+//                    b(d) += imDes(i, j+1, channel);
+//                if (maskDes.smartAccessor(i, j-1, 0) > 0.5f && j-1 >= 0)
+//                    b(d) += imDes(i, j-1, channel);
             }
             else {
                 b(d) = imDes(i, j, channel);
