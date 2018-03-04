@@ -55,18 +55,18 @@ void test_1D() {
 
 
 void test_2D() {
-    const FloatImage imSrc(DATA_DIR "/input/whale.png");
-    const FloatImage imDes(DATA_DIR "/input/water.png");
-    const FloatImage maskSrc(DATA_DIR "/input/whale_mask.png");
-    const FloatImage maskDes(DATA_DIR "/input/water_mask.png");
+    const FloatImage imSrc(DATA_DIR "/input/animations_small.png");
+    const FloatImage imDes(DATA_DIR "/input/wooden_small.png");
+    const FloatImage maskSrc(DATA_DIR "/input/animations_small_mask.png");
+    const FloatImage maskDes(DATA_DIR "/input/wooden_small_mask.png");
 
-    FloatImage gradientSrc = laplacian(imSrc);
-    FloatImage gradientDes = laplacian(imDes);
-    gradientSrc.write(DATA_DIR "/output/gradientSrc.png");
-    gradientDes.write(DATA_DIR "/output/gradientDes.png");
+//    FloatImage gradientSrc = laplacian(imSrc);
+//    FloatImage gradientDes = laplacian(imDes);
+//    gradientSrc.write(DATA_DIR "/output/gradientSrc.png");
+//    gradientDes.write(DATA_DIR "/output/gradientDes.png");
 
-    FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, true);
-    blend.write(DATA_DIR "/output/blendMixed_whale.png");
+    FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, false);
+    blend.write(DATA_DIR "/output/blend_wooden.png");
 }
 
 

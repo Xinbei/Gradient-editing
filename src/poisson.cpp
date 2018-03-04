@@ -109,7 +109,6 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatI
     // find the offset of mask source and mask destination
     int offset_x = 0;
     int offset_y = 0;
-
     for (int i = 0; i < maskSrc.width(); i++) {
         for (int j = 0; j < maskSrc.height(); j++) {
             if (maskSrc(i, j, channel) < 0.5) {
@@ -120,7 +119,6 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatI
         }
     }
     finish1:
-
     for (int i = 0; i < maskDes.width(); i++) {
         for (int j = 0; j < maskDes.height(); j++) {
             if (maskDes(i, j, channel) < 0.5) {
@@ -134,99 +132,63 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatI
 
     // build vector b using the gradient
     FloatImage gradientSrc = laplacian(imSrc);
-    FloatImage gradientDes = laplacian(imDes);
 
-    // testing purpose, just return the original image
     for (int i = 0; i < imDes.width(); i++) {
         for (int j = 0; j < imDes.height(); j++) {
             int d = j * maskDes.width() + i;
             if (maskDes(i, j, channel) < 0.5f) { // if is not white
 
-                // b = gradient of source image
-<<<<<<< HEAD
-                float srcGrad = gradientSrc.smartAccessor(i+offset_x, j+offset_y, channel);
-                if(mixGrad){
-                    float desGrad = gradientDes.smartAccessor(i, j, channel);
-                    b(d) = abs(desGrad) > abs(srcGrad) ? desGrad : srcGrad;
-                }else
-                    b(d) = srcGrad;
-=======
-//                float srcGrad = gradientSrc.smartAccessor(i+offset_x, j+offset_y, channel);
-//                float desGrad = gradientDes.smartAccessor(i, j, channel);
-                
-//                if (mixGrad) {
-//                    b(d) = fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
-////                    b(d) = desGrad;
-//                }else
-//                    b(d) = srcGrad;
-                
-                if (i > 0) {
-                    if (maskDes.smartAccessor(i-1, j, 0) > 0.5f) {
-                        b(d) += imDes(i-1, j, channel);
-                    }
-                    
-                    float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x-1, j+offset_y, channel, true);
-                    
-                    if (mixGrad) {
+                // add boundary condition
+                b(d) = 0.0f;
+                if (maskDes.smartAccessor(i+1, j, 0) > 0.5f && i+1 < maskDes.width())
+                    b(d) += imDes(i+1, j, channel);
+                if (maskDes.smartAccessor(i-1, j, 0) > 0.5f && i-1 >= 0)
+                    b(d) += imDes(i-1, j, channel);
+                if (maskDes.smartAccessor(i, j+1, 0) > 0.5f && j+1 < maskDes.height())
+                    b(d) += imDes(i, j+1, channel);
+                if (maskDes.smartAccessor(i, j-1, 0) > 0.5f && j-1 >= 0)
+                    b(d) += imDes(i, j-1, channel);
+
+                // no mixed gradient, just use the gradient of source image
+                if (!mixGrad) {
+                    float srcGrad = gradientSrc.smartAccessor(i+offset_x, j+offset_y, channel);
+                    b(d) += srcGrad;
+                }
+
+                // mixed gradient, find the max gradient in all four direction
+                else {
+                    // left gradient
+                    if (i > 0) {
+                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) -
+                                        imSrc.smartAccessor(i+offset_x-1, j+offset_y, channel, true);
                         float desGrad = imDes(i, j, channel) - imDes(i-1, j, channel);
                         b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
-                    }else
-                        b(d) += srcGrad;
-                }
-                
-                if (i+1 < maskDes.width()) {
-                    if (maskDes.smartAccessor(i+1, j, 0) > 0.5f) {
-                        b(d) += imDes(i+1, j, channel);
                     }
-                    
-                    float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x+1, j+offset_y, channel, true);
-                    
-                    if (mixGrad) {
+                    // right gradient
+                    if (i+1 < maskDes.width()) {
+                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) -
+                                        imSrc.smartAccessor(i+offset_x+1, j+offset_y, channel, true);
                         float desGrad = imDes(i, j, channel) - imDes(i+1, j, channel);
                         b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
-                    }else
-                        b(d) += srcGrad;
-                }
-                
-                if (j > 0) {
-                    if (maskDes.smartAccessor(i, j-1, 0) > 0.5f) {
-                        b(d) += imDes(i, j-1, channel);
                     }
-                    
-                    float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x, j+offset_y-1, channel, true);
-                    
-                    if (mixGrad) {
+                    // up gradient
+                    if (j > 0) {
+                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) -
+                                        imSrc.smartAccessor(i+offset_x, j+offset_y-1, channel, true);
                         float desGrad = imDes(i, j, channel) - imDes(i, j-1, channel);
                         b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
-                    }else
-                        b(d) += srcGrad;
-                }
-                
-                if (j+1 < maskDes.height()) {
-                    if (maskDes.smartAccessor(i, j+1, 0) > 0.5f) {
-                        b(d) += imDes(i, j+1, channel);
                     }
-                    
-                    float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x, j+offset_y+1, channel, true);
-                    
-                    if (mixGrad) {
+                    // down gradient
+                    if (j+1 < maskDes.height()) {
+                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) -
+                                        imSrc.smartAccessor(i+offset_x, j+offset_y+1, channel, true);
                         float desGrad = imDes(i, j, channel) - imDes(i, j+1, channel);
                         b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
-                    }else
-                        b(d) += srcGrad;
+                    }
                 }
->>>>>>> 0dc262dd73ad4273ab16cd0cd8fefec93610eaa2
-
-                // add boundary condition
-//                if (maskDes.smartAccessor(i+1, j, 0) > 0.5f && i+1 < maskDes.width())
-//                    b(d) += imDes(i+1, j, channel);
-//                if (maskDes.smartAccessor(i-1, j, 0) > 0.5f && i-1 >= 0)
-//                    b(d) += imDes(i-1, j, channel);
-//                if (maskDes.smartAccessor(i, j+1, 0) > 0.5f && j+1 < maskDes.height())
-//                    b(d) += imDes(i, j+1, channel);
-//                if (maskDes.smartAccessor(i, j-1, 0) > 0.5f && j-1 >= 0)
-//                    b(d) += imDes(i, j-1, channel);
             }
+
+            // if not in the mask, just return the target image color
             else {
                 b(d) = imDes(i, j, channel);
             }
