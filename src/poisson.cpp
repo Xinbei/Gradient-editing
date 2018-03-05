@@ -7,23 +7,28 @@ using namespace std;
 
 
 FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes,
-                      bool mixGrad) {
+                      bool mixGrad, bool isLog) {
 
 //    // chenck mask 1 == mask 2
 //    if (maskSrc.width() != maskDes.width() || maskSrc.height() != maskDes.height())
 //        throw std::invalid_argument( "The size of two masks does not match." );
 
-    FloatImage result(imDes.width(), imDes.height(), imDes.channels());
-
+    FloatImage result(imDes.width(), imDes.height(), imDes.channels()), poiDes(imDes);
+    
+    if (isLog) {
+        poiDes = log10FloatImage(imDes);
+    }
+    
     // separate channels
     vector<FloatImage> rgb = {FloatImage(imDes.width(), imDes.height(), 1),
                               FloatImage(imDes.width(), imDes.height(), 1),
                               FloatImage(imDes.width(), imDes.height(), 1)};
+
     for (int i = 0; i < imDes.width(); i++) {
         for (int j = 0; j < imDes.height(); j++) {
-            rgb[0](i, j, 0) = imDes(i, j, 0);
-            rgb[1](i, j, 0) = imDes(i, j, 1);
-            rgb[2](i, j, 0) = imDes(i, j, 2);
+            rgb[0](i, j, 0) = poiDes(i, j, 0);
+            rgb[1](i, j, 0) = poiDes(i, j, 1);
+            rgb[2](i, j, 0) = poiDes(i, j, 2);
         }
     }
 
@@ -33,9 +38,9 @@ FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const Fl
 
     // for each channels, get vector b
     printf("Vector b \n");
-    VectorXf br = getB_2D(imSrc, imDes, maskSrc, maskDes, 0, mixGrad);
-    VectorXf bg = getB_2D(imSrc, imDes, maskSrc, maskDes, 1, mixGrad);
-    VectorXf bb = getB_2D(imSrc, imDes, maskSrc, maskDes, 2, mixGrad);
+    VectorXf br = getB_2D(imSrc, poiDes, maskSrc, maskDes, 0, mixGrad);
+    VectorXf bg = getB_2D(imSrc, poiDes, maskSrc, maskDes, 1, mixGrad);
+    VectorXf bb = getB_2D(imSrc, poiDes, maskSrc, maskDes, 2, mixGrad);
 
     // solve for x
     printf("Solve xr \n");
@@ -54,8 +59,12 @@ FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const Fl
             result(i, j, 2) = xb(i, j, 0);
         }
     }
+    
+    if (isLog) {
+        return exp10FloatImage(result);
+    }else
+        return result;
 
-    return result;
 }
 
 
@@ -302,9 +311,61 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, int channel){
 }
 
 
+// image --> log10FloatImage
+FloatImage log10FloatImage(const FloatImage &im)
+{
+    FloatImage log10Image(im);
+    float min_non_zero = image_minnonzero(im);
+    
+    for (int x = 0; x < im.width(); x++) {
+        for (int y = 0; y < im.height(); y++) {
+            for (int c = 0; c < im.channels(); c++) {
+                if (im(x, y, c) == 0) {
+                    log10Image(x, y, c) = log10f(min_non_zero);
+                }else
+                    log10Image(x, y, c) = log10f(im(x, y, c));
+            }
+        }
+    }
+    
+    return log10Image; // change this
+}
 
+// FloatImage --> 10^FloatImage
+FloatImage exp10FloatImage(const FloatImage &im)
+{
+    // take an image in log10 domain and transform it back to linear domain.
+    // see pow(a, b)
+    FloatImage exp10Image(im);
+    
+    for (int x = 0; x < im.width(); x++) {
+        for (int y = 0; y < im.height(); y++) {
+            for (int c = 0; c < im.channels(); c++) {
+                exp10Image(x, y, c) = pow(10, im(x, y, c));
+            }
+        }
+    }
+    
+    return exp10Image; // change this
+}
 
-
+// min non-zero pixel value of image
+float image_minnonzero(const FloatImage &im)
+{
+    float min_non_zero = MAXFLOAT;
+    
+    for (int x = 0; x < im.width(); x++) {
+        for (int y = 0; y < im.height(); y++) {
+            for (int c = 0; c < im.channels(); c++) {
+                if (im(x, y, c) < min_non_zero && im(x, y, c) != 0) {
+                    min_non_zero = im(x, y, c);
+                }
+            }
+        }
+    }
+    
+    return min_non_zero; // change this
+}
 
 FloatImage Poisson_1D(const FloatImage &imSrc, const FloatImage &imDes, int min1, int max1, int min2, int max2) {
     // chenck mask 1 == mask 2

@@ -34,7 +34,7 @@ public:
     //-----------------------------------------------------------------------
     // A4: Safe Accessor that will return a black pixel (clampToEdge = false) or the
     // nearest pixel value (clampToEdge = true) when indexing out of the bounds of the image
-    float smartAccessor(int x, int y, int z, bool clampToEdge = false) const;
+    float smartAccessor(int x, int y, int z, bool clampToEdge = true) const;
     //@}
 
     //-----------------------------------------------------------------------
