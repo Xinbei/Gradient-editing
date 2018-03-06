@@ -282,8 +282,8 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage 
                 if (j-1 >= 0 && mask(i, j-1, channel) > 0.5f)
                     b(index) += im(i, j-1, channel);
 
-                // add edge gradient
-                if (edgeIm(i, j, channel) == 0) { // if edgeIm(i, j, channel) is not white
+                // add gradient if it is on the boundary of edges
+                if (edgeIm(i, j, channel) == 0) { // if edgeIm(i, j, channel) is black
                     // right
                     if (i+1 < edgeIm.width() && edgeIm(i+1, j, channel) == 1)
                         b(index) += im(i, j, channel) - im(i+1, j, channel);
@@ -297,7 +297,7 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage 
                     if (j-1 >= 0 && edgeIm(i, j-1, channel) == 1)
                         b(index) += im(i, j, channel) - im(i, j-1, channel);
 
-                // use gradient of original image if not edge information provided
+                // use gradient of original image if it is the edge
                 }else
                     b(index) += gradientIm(i, j, channel);
 
