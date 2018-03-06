@@ -87,6 +87,9 @@ void test() {
     cout << "The relative error is:\n" << relative_error << endl;
 }
 
+
+
+
 void testTF(){
     const FloatImage im(DATA_DIR "/input/child.jpg");
     const FloatImage mask(DATA_DIR "/input/child_mask.png");
