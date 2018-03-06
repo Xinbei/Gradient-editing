@@ -88,24 +88,30 @@ void test() {
 }
 
 void testTF(){
-    const FloatImage im(DATA_DIR "/input/ha-18.jpg");
-    const FloatImage mask(DATA_DIR "/input/ha-18-mask.jpg");
+    const FloatImage im(DATA_DIR "/input/child001.jpg");
+    const FloatImage mask(DATA_DIR "/input/child_mask.png");
+    FloatImage edgeIm(DATA_DIR "/input/child_edge.png");
 //    FloatImage mask = gradientMagnitude(im);
-//    FloatImage test(mask.width(), mask.height(), 1);
     
-//    for (int i = 0; i < mask.width(); i++) {
-//        for (int j = 0; j < mask.height(); j++) {
-//            if(mask(i, j, 0) > 0.3)
-//                test(i, j, 0) = 1;
+//    cout << edgeIm.channels() << endl;
+//    
+//    for (int i = 0; i < edgeIm.width(); i++) {
+//        for (int j = 0; j < edgeIm.height(); j++) {
+        
+//            cout << edgeIm(i, j, 0) << endl;
+//            cout << edgeIm(i, j, 1) << endl;
+//            cout << edgeIm(i, j, 2) << endl;
+            
+//            if(edgeIm(i, j, 0) > 0.1)
+//                edgeIm(i, j, 0) = 1;
 //            else
-//                test(i, j, 0) = 0;
+//                edgeIm(i, j, 0) = 0;
+//        
 //        }
 //    }
-    
-//    test.write(DATA_DIR "/output/ha-18-mask.png");
-    
-    FloatImage flattened = textureFlattening(im,mask);
-    flattened.write(DATA_DIR "/output/ha-18-flattened.png");
+        
+    FloatImage flattened = textureFlattening(im, mask, edgeIm);
+    flattened.write(DATA_DIR "/output/child_flattened.png");
 }
 
 
@@ -114,8 +120,8 @@ void testTF(){
 int main() {
     cout << "Hello World!" << endl;
 //    try { test_1D();}   catch(...) {cout << "test_1D Failed!" << endl;}
-    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
-//    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
+//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
 
 //    try { test();}   catch(...) {cout << "test Failed!" << endl;}
     cout << "END" << endl;

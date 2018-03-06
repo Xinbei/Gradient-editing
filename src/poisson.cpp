@@ -227,18 +227,21 @@ FloatImage solve_2D(const FloatImage &imDes, const SparseMatrix<float> &A, const
 
 
 
-FloatImage textureFlattening(const FloatImage &im, const FloatImage &mask){
+FloatImage textureFlattening(const FloatImage &im, const FloatImage &mask, const FloatImage &edgeIm, bool isLog){
     
-    FloatImage flattenedIm(im);
+    FloatImage flattenedIm(im), imSrc(im);
+    
+    if(isLog)
+        imSrc = log10FloatImage(im);
     
     vector<FloatImage> rgb = {FloatImage(im.width(), im.height(), 1),
         FloatImage(im.width(), im.height(), 1),
         FloatImage(im.width(), im.height(), 1)};
     for (int i = 0; i < im.width(); i++) {
         for (int j = 0; j < im.height(); j++) {
-            rgb[0](i, j, 0) = im(i, j, 0);
-            rgb[1](i, j, 0) = im(i, j, 1);
-            rgb[2](i, j, 0) = im(i, j, 2);
+            rgb[0](i, j, 0) = imSrc(i, j, 0);
+            rgb[1](i, j, 0) = imSrc(i, j, 1);
+            rgb[2](i, j, 0) = imSrc(i, j, 2);
         }
     }
     
@@ -248,9 +251,9 @@ FloatImage textureFlattening(const FloatImage &im, const FloatImage &mask){
     
     // for each channels, get vector b
     printf("Vector b \n");
-    VectorXf br = getB_tf(im, mask, 0);
-    VectorXf bg = getB_tf(im, mask, 1);
-    VectorXf bb = getB_tf(im, mask, 2);
+    VectorXf br = getB_tf(imSrc, mask, edgeIm, 0);
+    VectorXf bg = getB_tf(imSrc, mask, edgeIm, 1);
+    VectorXf bb = getB_tf(imSrc, mask, edgeIm, 2);
     
     // solve for x
     printf("Solve xr \n");
@@ -270,14 +273,18 @@ FloatImage textureFlattening(const FloatImage &im, const FloatImage &mask){
         }
     }
     
-    return flattenedIm;
-    
+    if (isLog) {
+        return exp10FloatImage(flattenedIm);
+    }else
+        return flattenedIm;
 }
 
 
-VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, int channel){
+VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage &edgeIm, int channel){
     int N = mask.width() * mask.height(), index = 0;
     VectorXf b(N);
+    
+    FloatImage gradientIm = laplacian(im);
     
     for (int i = 0; i < im.width(); i++) {
         for (int j = 0; j < im.height(); j++) {
@@ -285,22 +292,34 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, int channel){
             
             if (mask(i, j, 0) < 0.5f) {
                 b(index) = 0.0f;
-                if (i+1 < mask.width() && mask(i+1, j, 0) > 0.5f){
+                if (i+1 < mask.width() && mask(i+1, j, 0) > 0.5f)
                     b(index) += im(i+1, j, channel);
-                    b(index) += im(i, j, channel) - im(i+1, j, channel);
-                }
-                if (i-1 >= 0 && mask(i-1, j, 0) > 0.5f){
+                    
+                if (i-1 >= 0 && mask(i-1, j, 0) > 0.5f)
                     b(index) += im(i-1, j, channel);
-                    b(index) += im(i, j, channel) - im(i-1, j, channel);
-                }
-                if (j+1 < mask.height() && mask(i, j+1, 0) > 0.5f){
+                
+                if (j+1 < mask.height() && mask(i, j+1, 0) > 0.5f)
                     b(index) += im(i, j+1, channel);
-                    b(index) += im(i, j, channel) - im(i, j+1, channel);
-                }
-                if (j-1 >= 0 && mask(i, j-1, 0) > 0.5f){
+                
+                if (j-1 >= 0 && mask(i, j-1, 0) > 0.5f)
                     b(index) += im(i, j-1, channel);
-                    b(index) += im(i, j, channel) - im(i, j-1, channel);
-                }
+                
+                if (edgeIm(i, j, 0) == 0) {
+                    
+                    if (i+1 < edgeIm.width() && edgeIm(i+1, j, 0) == 1)
+                        b(index) += im(i, j, channel) - im(i+1, j, channel);
+                    
+                    if (i-1 >= 0 && edgeIm(i-1, j, 0) == 1)
+                        b(index) += im(i, j, channel) - im(i-1, j, channel);
+                    
+                    if (j+1 < mask.height() && edgeIm(i, j+1, 0) == 1)
+                        b(index) += im(i, j, channel) - im(i, j+1, channel);
+                    
+                    if (j-1 >= 0 && edgeIm(i, j-1, 0) == 1)
+                        b(index) += im(i, j, channel) - im(i, j-1, channel);
+                }else
+                    b(index) += gradientIm(i, j, channel);
+
 
             }else
                 b(index) = im(i, j, channel);

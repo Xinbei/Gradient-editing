@@ -21,8 +21,8 @@ SparseMatrix<float> getA_2D(const FloatImage &maskDes);
 VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes, int channel, bool mixGrad=false);
 FloatImage solve_2D(const FloatImage &imDes, const SparseMatrix<float> &A, const VectorXf &b);
 
-FloatImage textureFlattening(const FloatImage &im, const FloatImage &mask);
-VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, int channel);
+FloatImage textureFlattening(const FloatImage &im, const FloatImage &mask, const FloatImage &edgeIm, bool isLog = false);
+VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage &edgeIm, int channel);
 
 FloatImage log10FloatImage(const FloatImage &im);
 FloatImage exp10FloatImage(const FloatImage &im);
