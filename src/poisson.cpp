@@ -18,19 +18,6 @@ FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const Fl
     if (isLog) {
         poiDes = log10FloatImage(imDes);
     }
-    
-    // separate channels
-    vector<FloatImage> rgb = {FloatImage(imDes.width(), imDes.height(), 1),
-                              FloatImage(imDes.width(), imDes.height(), 1),
-                              FloatImage(imDes.width(), imDes.height(), 1)};
-
-    for (int i = 0; i < imDes.width(); i++) {
-        for (int j = 0; j < imDes.height(); j++) {
-            rgb[0](i, j, 0) = poiDes(i, j, 0);
-            rgb[1](i, j, 0) = poiDes(i, j, 1);
-            rgb[2](i, j, 0) = poiDes(i, j, 2);
-        }
-    }
 
     // get matrix A, same for all channels
     printf("Matrix A \n");
@@ -234,17 +221,6 @@ FloatImage textureFlattening(const FloatImage &im, const FloatImage &mask, const
     if(isLog)
         imSrc = log10FloatImage(im);
     
-    vector<FloatImage> rgb = {FloatImage(im.width(), im.height(), 1),
-        FloatImage(im.width(), im.height(), 1),
-        FloatImage(im.width(), im.height(), 1)};
-    for (int i = 0; i < im.width(); i++) {
-        for (int j = 0; j < im.height(); j++) {
-            rgb[0](i, j, 0) = imSrc(i, j, 0);
-            rgb[1](i, j, 0) = imSrc(i, j, 1);
-            rgb[2](i, j, 0) = imSrc(i, j, 2);
-        }
-    }
-    
     // get matrix A, same for all channels
     printf("Matrix A \n");
     SparseMatrix<float> A = getA_2D(mask);
@@ -289,38 +265,43 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage 
     for (int i = 0; i < im.width(); i++) {
         for (int j = 0; j < im.height(); j++) {
             index = j * im.width() + i;
-            
-            if (mask(i, j, 0) < 0.5f) {
+
+            // add boundary condition
+            if (mask(i, j, channel) < 0.5f) {  // if mask(i, j, channel) is not white
                 b(index) = 0.0f;
-                if (i+1 < mask.width() && mask(i+1, j, 0) > 0.5f)
+                // right
+                if (i+1 < mask.width() && mask(i+1, j, channel) > 0.5f)
                     b(index) += im(i+1, j, channel);
-                    
+                // left
                 if (i-1 >= 0 && mask(i-1, j, 0) > 0.5f)
                     b(index) += im(i-1, j, channel);
-                
-                if (j+1 < mask.height() && mask(i, j+1, 0) > 0.5f)
+                // down
+                if (j+1 < mask.height() && mask(i, j+1, channel) > 0.5f)
                     b(index) += im(i, j+1, channel);
-                
-                if (j-1 >= 0 && mask(i, j-1, 0) > 0.5f)
+                // up
+                if (j-1 >= 0 && mask(i, j-1, channel) > 0.5f)
                     b(index) += im(i, j-1, channel);
-                
-                if (edgeIm(i, j, 0) == 0) {
-                    
-                    if (i+1 < edgeIm.width() && edgeIm(i+1, j, 0) == 1)
+
+                // add edge gradient
+                if (edgeIm(i, j, channel) == 0) { // if edgeIm(i, j, channel) is not white
+                    // right
+                    if (i+1 < edgeIm.width() && edgeIm(i+1, j, channel) == 1)
                         b(index) += im(i, j, channel) - im(i+1, j, channel);
-                    
-                    if (i-1 >= 0 && edgeIm(i-1, j, 0) == 1)
+                    // left
+                    if (i-1 >= 0 && edgeIm(i-1, j, channel) == 1)
                         b(index) += im(i, j, channel) - im(i-1, j, channel);
-                    
-                    if (j+1 < mask.height() && edgeIm(i, j+1, 0) == 1)
+                    // down
+                    if (j+1 < mask.height() && edgeIm(i, j+1, channel) == 1)
                         b(index) += im(i, j, channel) - im(i, j+1, channel);
-                    
-                    if (j-1 >= 0 && edgeIm(i, j-1, 0) == 1)
+                    // up
+                    if (j-1 >= 0 && edgeIm(i, j-1, channel) == 1)
                         b(index) += im(i, j, channel) - im(i, j-1, channel);
+
+                // use gradient of original image if not edge information provided
                 }else
                     b(index) += gradientIm(i, j, channel);
 
-
+            // if not in the mask, just return the target image color
             }else
                 b(index) = im(i, j, channel);
         }
@@ -331,8 +312,7 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage 
 
 
 // image --> log10FloatImage
-FloatImage log10FloatImage(const FloatImage &im)
-{
+FloatImage log10FloatImage(const FloatImage &im) {
     FloatImage log10Image(im);
     float min_non_zero = image_minnonzero(im);
     
@@ -351,8 +331,7 @@ FloatImage log10FloatImage(const FloatImage &im)
 }
 
 // FloatImage --> 10^FloatImage
-FloatImage exp10FloatImage(const FloatImage &im)
-{
+FloatImage exp10FloatImage(const FloatImage &im) {
     // take an image in log10 domain and transform it back to linear domain.
     // see pow(a, b)
     FloatImage exp10Image(im);
@@ -369,9 +348,8 @@ FloatImage exp10FloatImage(const FloatImage &im)
 }
 
 // min non-zero pixel value of image
-float image_minnonzero(const FloatImage &im)
-{
-    float min_non_zero = MAXFLOAT;
+float image_minnonzero(const FloatImage &im) {
+    float min_non_zero = INFINITY;
     
     for (int x = 0; x < im.width(); x++) {
         for (int y = 0; y < im.height(); y++) {
@@ -385,6 +363,9 @@ float image_minnonzero(const FloatImage &im)
     
     return min_non_zero; // change this
 }
+
+
+
 
 FloatImage Poisson_1D(const FloatImage &imSrc, const FloatImage &imDes, int min1, int max1, int min2, int max2) {
     // chenck mask 1 == mask 2
@@ -402,8 +383,6 @@ FloatImage Poisson_1D(const FloatImage &imSrc, const FloatImage &imDes, int min1
             rgb[2](i, j, 0) = imDes(i, j, 2);
         }
     }
-
-
     // get matrix A and vector b
     MatrixXf A = getA_1D(max1, min1);
     vector<VectorXf> b;
