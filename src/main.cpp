@@ -91,7 +91,7 @@ void test() {
 
 
 void testTF(){
-    const FloatImage im(DATA_DIR "/input/child001.jpg");
+    const FloatImage im(DATA_DIR "/input/child.jpg");
     const FloatImage mask(DATA_DIR "/input/child_mask.png");
     FloatImage edgeIm(DATA_DIR "/input/child_edge.png");
 //    FloatImage mask = gradientMagnitude(im);
@@ -109,24 +109,21 @@ void testTF(){
 //                edgeIm(i, j, 0) = 1;
 //            else
 //                edgeIm(i, j, 0) = 0;
-//        
+        
 //        }
 //    }
-        
+    
     FloatImage flattened = textureFlattening(im, mask, edgeIm);
     flattened.write(DATA_DIR "/output/child_flattened.png");
 }
 
-
-
-void testLI() {
-    const FloatImage im(DATA_DIR "/input/orange.png");
+void test_local_change(){
+    const FloatImage im(DATA_DIR "/input/orange.jpg");
     const FloatImage mask(DATA_DIR "/input/orange_mask.png");
-
-
+    
+    FloatImage illu_changed = local_changes(im, mask, getB_local_illu);
+    illu_changed.write(DATA_DIR "/output/orange_illu_change.png");
 }
-
-
 
 
 int main() {
@@ -134,7 +131,7 @@ int main() {
 //    try { test_1D();}   catch(...) {cout << "test_1D Failed!" << endl;}
 //    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
-    try { testLI();}   catch(...) {cout << "test_il Failed!" << endl;}
+    try { test_local_change();}   catch(...) {cout << "test_local_change Failed!" << endl;}
 
 //    try { test();}   catch(...) {cout << "test Failed!" << endl;}
     cout << "END" << endl;

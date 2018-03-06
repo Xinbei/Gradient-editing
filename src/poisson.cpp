@@ -310,6 +310,95 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage 
     return b;
 }
 
+FloatImage local_changes(const FloatImage &im, const FloatImage &mask, VectorXf (*getB_lc)(FloatImage&, const FloatImage&, int), bool isLog){
+    
+    FloatImage result(im), imSrc(im);
+    
+    if(isLog)
+        imSrc = log10FloatImage(im);
+    
+    // get matrix A, same for all channels
+    printf("Matrix A \n");
+    SparseMatrix<float> A = getA_2D(mask);
+    
+    // for each channels, get vector b
+    printf("Vector b \n");
+    VectorXf br = getB_lc(imSrc, mask, 0);
+    VectorXf bg = getB_lc(imSrc, mask, 1);
+    VectorXf bb = getB_lc(imSrc, mask, 2);
+    
+    // solve for x
+    printf("Solve xr \n");
+    FloatImage xr = solve_2D(im, A, br);
+    printf("Solve xg \n");
+    FloatImage xg = solve_2D(im, A, bg);
+    printf("Solve xb \n");
+    FloatImage xb = solve_2D(im, A, bb);
+    
+    // combine channels
+    printf("Combine channels \n");
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            result(i, j, 0) = xr(i, j, 0);
+            result(i, j, 1) = xg(i, j, 0);
+            result(i, j, 2) = xb(i, j, 0);
+        }
+    }
+    
+    if (isLog) {
+        return exp10FloatImage(result);
+    }else
+        return result;
+}
+
+VectorXf getB_local_illu(FloatImage &im, const FloatImage &mask, int channel){
+    int N = im.width()*im.height(), index = 0;
+    VectorXf b(N);
+    
+    FloatImage gradient = laplacian(im);
+    
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            index = j * im.width() + i;
+            
+            if (mask(i, j, 0) < 0.5f) {
+                
+                b(index) = 0.0f;
+                if (i+1 < mask.width() && mask(i+1, j, 0) > 0.5f)
+                    b(index) += im(i+1, j, channel);
+                if (i-1 >= 0 && mask(i-1, j, 0) > 0.5f)
+                    b(index) += im(i-1, j, channel);
+                if (j+1 < mask.height() && mask(i, j+1, 0) > 0.5f)
+                    b(index) += im(i, j+1, channel);
+                if (j-1 >= 0 && mask(i, j-1, 0) > 0.5f)
+                    b(index) += im(i, j-1, channel);
+                
+                float top = j > 0? im(i, j, channel) - im(i, j-1, channel):0;
+                float down = j+1 < im.height()? im(i, j, channel) - im(i, j+1, channel):0;
+                float left = i > 0? im(i, j, channel) - im(i-1, j, channel):0;
+                float right = i+1 < im.width()? im(i, j, channel) - im(i+1, j, channel):0;
+                
+                if(top != 0)
+                    b(index) += pow(0.2, 0.2) * pow(abs(top), -0.2) * top;
+                
+                if(down != 0)
+                    b(index) += pow(0.2, 0.2) * pow(abs(down), -0.2) * down;
+                
+                if(left != 0)
+                    b(index) += pow(0.2, 0.2) * pow(abs(left), -0.2) * left;
+                
+                if(right != 0)
+                    b(index) += pow(0.2, 0.2) * pow(abs(right), -0.2) * right;
+                
+                cout << b(index) << endl;
+            }else
+                b(index) = im(i, j, channel);
+        }
+    }
+    
+    return b;
+}
+
 
 
 // image --> log10FloatImage
