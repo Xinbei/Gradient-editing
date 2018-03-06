@@ -361,16 +361,16 @@ VectorXf getB_local_illu(FloatImage &im, const FloatImage &mask, int channel){
         for (int j = 0; j < im.height(); j++) {
             index = j * im.width() + i;
             
-            if (mask(i, j, 0) < 0.5f) {
+            if (mask(i, j, channel) < 0.5f) {
                 
                 b(index) = 0.0f;
-                if (i+1 < mask.width() && mask(i+1, j, 0) > 0.5f)
+                if (i+1 < mask.width() && mask(i+1, j, channel) > 0.5f)
                     b(index) += im(i+1, j, channel);
-                if (i-1 >= 0 && mask(i-1, j, 0) > 0.5f)
+                if (i-1 >= 0 && mask(i-1, j, channel) > 0.5f)
                     b(index) += im(i-1, j, channel);
-                if (j+1 < mask.height() && mask(i, j+1, 0) > 0.5f)
+                if (j+1 < mask.height() && mask(i, j+1, channel) > 0.5f)
                     b(index) += im(i, j+1, channel);
-                if (j-1 >= 0 && mask(i, j-1, 0) > 0.5f)
+                if (j-1 >= 0 && mask(i, j-1, channel) > 0.5f)
                     b(index) += im(i, j-1, channel);
                 
                 float top = j > 0? im(i, j, channel) - im(i, j-1, channel):0;
