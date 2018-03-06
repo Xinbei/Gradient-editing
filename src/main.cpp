@@ -119,12 +119,22 @@ void testTF(){
 
 
 
+void testLI() {
+    const FloatImage im(DATA_DIR "/input/orange.png");
+    const FloatImage mask(DATA_DIR "/input/orange_mask.png");
+
+
+}
+
+
+
 
 int main() {
     cout << "Hello World!" << endl;
 //    try { test_1D();}   catch(...) {cout << "test_1D Failed!" << endl;}
 //    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
-    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
+//    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
+    try { testLI();}   catch(...) {cout << "test_il Failed!" << endl;}
 
 //    try { test();}   catch(...) {cout << "test Failed!" << endl;}
     cout << "END" << endl;

@@ -311,6 +311,7 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage 
 }
 
 
+
 // image --> log10FloatImage
 FloatImage log10FloatImage(const FloatImage &im) {
     FloatImage log10Image(im);
