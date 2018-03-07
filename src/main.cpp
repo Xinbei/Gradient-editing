@@ -146,13 +146,10 @@ void test_tile() {
 
 int main() {
     cout << "Hello World!" << endl;
-    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
-<<<<<<< HEAD
 //    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
-=======
     try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
->>>>>>> 48f7f7ace5e294b0f86b4cb446dceaa38cc87d74
 //    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
 
 //    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
