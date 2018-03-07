@@ -126,13 +126,13 @@ void test_local_change(){
 }
 
 void test_tile() {
-    const FloatImage im(DATA_DIR "/input/tile.jpg");
+    const FloatImage im(DATA_DIR "/input/chalk.png");
     FloatImage tileIm = tiledImage(im);
-    tileIm.write(DATA_DIR "/output/tile_original.png");
+    tileIm.write(DATA_DIR "/output/chalk_original.png");
 
     FloatImage im2 = seamless_tiling(im, true);
     FloatImage tileIm2 = tiledImage(im2);
-    tileIm2.write(DATA_DIR "/output/tile_seamlessTile.png");
+    tileIm2.write(DATA_DIR "/output/chalk_seamlessTile.png");
 }
 
 
