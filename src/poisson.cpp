@@ -135,14 +135,18 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatI
 
                 // add boundary condition
                 b(d) = 0.0f;
-                if (maskDes.smartAccessor(i+1, j, channel) > 0.5f && i+1 < maskDes.width())
-                    b(d) += imDes(i+1, j, channel);
-                if (maskDes.smartAccessor(i-1, j, channel) > 0.5f && i-1 >= 0)
-                    b(d) += imDes(i-1, j, channel);
-                if (maskDes.smartAccessor(i, j+1, channel) > 0.5f && j+1 < maskDes.height())
-                    b(d) += imDes(i, j+1, channel);
-                if (maskDes.smartAccessor(i, j-1, channel) > 0.5f && j-1 >= 0)
-                    b(d) += imDes(i, j-1, channel);
+                // right
+                if (i == maskDes.width() - 1 || maskDes(i+1, j, channel) > 0.5f)
+                    b(d) += imDes.smartAccessor(i+1, j, channel);
+                // left
+                if (i == 0 || maskDes(i-1, j, 0) > 0.5f)
+                    b(d) += imDes.smartAccessor(i-1, j, channel);
+                // down
+                if (j == maskDes.height() - 1 || maskDes(i, j+1, channel) > 0.5f)
+                    b(d) += imDes.smartAccessor(i, j+1, channel);
+                // up
+                if (j == 0 || maskDes(i, j-1, channel) > 0.5f)
+                    b(d) += imDes.smartAccessor(i, j-1, channel);
 
                 // add special boundary when the mask is close to edge of image
                 if (i == imDes.width()-1)
@@ -279,17 +283,17 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage 
             if (mask(i, j, channel) < 0.5f) {  // if mask(i, j, channel) is not white
                 b(index) = 0.0f;
                 // right
-                if (i+1 < mask.width() && mask(i+1, j, channel) > 0.5f)
-                    b(index) += im(i+1, j, channel);
+                if (i == mask.width() - 1 || mask(i+1, j, channel) > 0.5f)
+                    b(index) += im.smartAccessor(i+1, j, channel);
                 // left
-                if (i-1 >= 0 && mask(i-1, j, 0) > 0.5f)
-                    b(index) += im(i-1, j, channel);
+                if (i == 0 || mask(i-1, j, 0) > 0.5f)
+                    b(index) += im.smartAccessor(i-1, j, channel);
                 // down
-                if (j+1 < mask.height() && mask(i, j+1, channel) > 0.5f)
-                    b(index) += im(i, j+1, channel);
+                if (j == mask.height() - 1 || mask(i, j+1, channel) > 0.5f)
+                    b(index) += im.smartAccessor(i, j+1, channel);
                 // up
-                if (j-1 >= 0 && mask(i, j-1, channel) > 0.5f)
-                    b(index) += im(i, j-1, channel);
+                if (j == 0 || mask(i, j-1, channel) > 0.5f)
+                    b(index) += im.smartAccessor(i, j-1, channel);
 
                 // add gradient if it is on the boundary of edges
                 if (edgeIm(i, j, channel) == 0) { // if edgeIm(i, j, channel) is black
@@ -323,13 +327,14 @@ FloatImage local_changes(const FloatImage &im, const FloatImage &mask, vector<Ve
     
     FloatImage result(im), imSrc(im);
     
-    if(isLog)
-        imSrc = log10FloatImage(im);
+//    if(isLog)
+//        imSrc = log10FloatImage(im);
     
     // get matrix A, same for all channels
     printf("Matrix A \n");
     SparseMatrix<float> A = getA_2D(mask);
     
+
     // solve for x
     printf("Solve xr \n");
     FloatImage xr = solve_2D(im, A, b[0]);
@@ -359,8 +364,6 @@ VectorXf getB_local_illu(const FloatImage &im, const FloatImage &mask, int chann
     VectorXf b(N);
     float gradNorm = 0.0;
     
-    FloatImage gradient = laplacian(im);
-    
     for (int i = 0; i < im.width(); i++) {
         for (int j = 0; j < im.height(); j++) {
             if (mask(i, j, 0) < 0.5f) {
@@ -369,11 +372,14 @@ VectorXf getB_local_illu(const FloatImage &im, const FloatImage &mask, int chann
                 float left = i > 0? im(i, j, channel) - im(i-1, j, channel):0;
                 float right = i+1 < im.width()? im(i, j, channel) - im(i+1, j, channel):0;
 
-                gradNorm += sqrt(pow(top+down,2) + pow(left+right, 2));
+//                gradNorm += sqrt(pow(top+down,2) + pow(left+right, 2));
+                gradNorm += sqrt(top*top + down*down + left*left + right*right);
                 count++;
             }
         }
     }
+    
+    float aver_grad_norm = gradNorm / count;
     
     for (int i = 0; i < im.width(); i++) {
         for (int j = 0; j < im.height(); j++) {
@@ -382,40 +388,36 @@ VectorXf getB_local_illu(const FloatImage &im, const FloatImage &mask, int chann
             if (mask(i, j, channel) < 0.5f) {
 
                 b(index) = 0.0f;
-                if (i+1 < mask.width() && mask(i+1, j, channel) > 0.5f)
-                    b(index) += im(i+1, j, channel);
-                if (i-1 >= 0 && mask(i-1, j, channel) > 0.5f)
-                    b(index) += im(i-1, j, channel);
-                if (j+1 < mask.height() && mask(i, j+1, channel) > 0.5f)
-                    b(index) += im(i, j+1, channel);
-                if (j-1 >= 0 && mask(i, j-1, channel) > 0.5f)
-                    b(index) += im(i, j-1, channel);
                 
-                if (gradient(i, j, channel) != 0) {
-                    float top = j > 0? im(i, j, channel) - im(i, j-1, channel):0;
-                    float down = j+1 < im.height()? im(i, j, channel) - im(i, j+1, channel):0;
-                    float left = i > 0? im(i, j, channel) - im(i-1, j, channel):0;
-                    float right = i+1 < im.width()? im(i, j, channel) - im(i+1, j, channel):0;
-                    
-//                    alpha = alpha * sqrt(pow(top+down, 2)+pow(left+right, 2)) / 2;
-                    alpha = alpha * gradNorm / count;
-                    
-                    if(top != 0)
-                        b(index) += pow(alpha/abs(top), beta) * top;
-                    
-                    if(down != 0)
-                        b(index) += pow(alpha/abs(down), beta) * down;
-                    
-                    if(left != 0)
-                        b(index) += pow(alpha/abs(left), beta) * left;
-                    
-                    if(right != 0)
-                        b(index) += pow(alpha/abs(right), beta) * right;
-
-                    
-//                    b(index) += powf(alpha/abs(gradient(i, j, channel)), beta) * gradient(i, j, channel);
-                }
+                // right
+                if (i == mask.width() - 1 || mask(i+1, j, channel) > 0.5f)
+                    b(index) += im.smartAccessor(i+1, j, channel);
+                // left
+                if (i == 0 || mask(i-1, j, 0) > 0.5f)
+                    b(index) += im.smartAccessor(i-1, j, channel);
+                // down
+                if (j == mask.height() - 1 || mask(i, j+1, channel) > 0.5f)
+                    b(index) += im.smartAccessor(i, j+1, channel);
+                // up
+                if (j == 0 || mask(i, j-1, channel) > 0.5f)
+                    b(index) += im.smartAccessor(i, j-1, channel);
                 
+                float top = j > 0? im(i, j, channel) - im(i, j-1, channel):0;
+                float down = j+1 < im.height()? im(i, j, channel) - im(i, j+1, channel):0;
+                float left = i > 0? im(i, j, channel) - im(i-1, j, channel):0;
+                float right = i+1 < im.width()? im(i, j, channel) - im(i+1, j, channel):0;
+                
+                if(top != 0)
+                    b(index) += pow(alpha * aver_grad_norm/abs(top), beta) * top;
+                
+                if(down != 0)
+                    b(index) += pow(alpha * aver_grad_norm/abs(down), beta) * down;
+                
+                if(left != 0)
+                    b(index) += pow(alpha * aver_grad_norm/abs(left), beta) * left;
+                
+                if(right != 0)
+                    b(index) += pow(alpha * aver_grad_norm/abs(right), beta) * right;
                 
             }else
                 b(index) = im(i, j, channel);
