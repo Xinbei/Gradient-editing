@@ -27,10 +27,17 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage 
 FloatImage local_changes(const FloatImage &im, const FloatImage &mask, VectorXf (*getB_lc)(FloatImage&, const FloatImage&, int), bool isLog=true);
 VectorXf getB_local_illu(FloatImage &im, const FloatImage &mask, int channel);
 
+FloatImage seamless_tiling(const FloatImage &im, bool isLog=false);
+VectorXf getB_tile(FloatImage &im, int channel);
+
+
+
 // utility function
 FloatImage log10FloatImage(const FloatImage &im);
 FloatImage exp10FloatImage(const FloatImage &im);
 float image_minnonzero(const FloatImage &im);
+FloatImage tiledImage(const FloatImage &im, int m=3, int n=2);
+
 
 // 1D case
 FloatImage Poisson_1D(const FloatImage &imSrc, const FloatImage &imDes, int min1, int max1, int min2, int max2);

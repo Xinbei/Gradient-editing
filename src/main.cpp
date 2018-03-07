@@ -125,13 +125,27 @@ void test_local_change(){
     illu_changed.write(DATA_DIR "/output/orange_illu_change.png");
 }
 
+void test_tile() {
+    const FloatImage im(DATA_DIR "/input/tile.jpg");
+    FloatImage tileIm = tiledImage(im);
+    tileIm.write(DATA_DIR "/output/tile_original.png");
+
+    FloatImage im2 = seamless_tiling(im, true);
+    FloatImage tileIm2 = tiledImage(im2);
+    tileIm2.write(DATA_DIR "/output/tile_seamlessTile.png");
+}
+
+
+
+
 
 int main() {
     cout << "Hello World!" << endl;
 //    try { test_1D();}   catch(...) {cout << "test_1D Failed!" << endl;}
 //    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
-    try { test_local_change();}   catch(...) {cout << "test_local_change Failed!" << endl;}
+//    try { test_local_change();}   catch(...) {cout << "test_local_change Failed!" << endl;}
+    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
 
 //    try { test();}   catch(...) {cout << "test Failed!" << endl;}
     cout << "END" << endl;

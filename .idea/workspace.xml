@@ -27,8 +27,8 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="116" column="60" lean-forward="true" selection-start-line="116" selection-start-column="60" selection-end-line="116" selection-end-column="60" />
+            <state relative-caret-position="448">
+              <caret line="135" column="1" lean-forward="false" selection-start-line="135" selection-start-column="1" selection-end-line="135" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -37,8 +37,8 @@
       <file leaf-file-name="poisson.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/poisson.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+            <state relative-caret-position="242">
+              <caret line="38" column="60" lean-forward="false" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
               <folding>
                 <element signature="e#49#72#0" expanded="true" />
               </folding>
@@ -49,8 +49,8 @@
       <file leaf-file-name="poisson.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/poisson.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-855">
-              <caret line="372" column="43" lean-forward="true" selection-start-line="372" selection-start-column="43" selection-end-line="372" selection-end-column="43" />
+            <state relative-caret-position="1116">
+              <caret line="502" column="0" lean-forward="true" selection-start-line="502" selection-start-column="0" selection-end-line="502" selection-end-column="0" />
               <folding>
                 <element signature="e#1#21#0" expanded="true" />
               </folding>
@@ -166,12 +166,12 @@
       <updated>1519782707328</updated>
       <workItem from="1519782710586" duration="12307000" />
       <workItem from="1520117183826" duration="12646000" />
-      <workItem from="1520353598270" duration="3388000" />
+      <workItem from="1520353598270" duration="10080000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28341000" />
+    <option name="totallyTimeSpent" value="35033000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="953" y="0" width="974" height="1047" extended-state="0" />
@@ -286,18 +286,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://D:/Homework/Dartmouth/2018 Winter/Computational Photography/assignment 5/assignment5/src/hdr.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3434">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Homework/Dartmouth/2018 Winter/Computational Photography/assignment 3/assignment3/src/align.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="260" column="0" lean-forward="true" selection-start-line="260" selection-start-column="0" selection-end-line="291" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="116" column="60" lean-forward="true" selection-start-line="116" selection-start-column="60" selection-end-line="116" selection-end-column="60" />
+        <state relative-caret-position="448">
+          <caret line="135" column="1" lean-forward="false" selection-start-line="135" selection-start-column="1" selection-end-line="135" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/poisson.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+        <state relative-caret-position="242">
+          <caret line="38" column="60" lean-forward="false" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
           <folding>
             <element signature="e#49#72#0" expanded="true" />
           </folding>
@@ -306,8 +322,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/poisson.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-855">
-          <caret line="372" column="43" lean-forward="true" selection-start-line="372" selection-start-column="43" selection-end-line="372" selection-end-column="43" />
+        <state relative-caret-position="1116">
+          <caret line="502" column="0" lean-forward="true" selection-start-line="502" selection-start-column="0" selection-end-line="502" selection-end-column="0" />
           <folding>
             <element signature="e#1#21#0" expanded="true" />
           </folding>

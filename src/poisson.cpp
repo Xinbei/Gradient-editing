@@ -326,7 +326,7 @@ FloatImage local_changes(const FloatImage &im, const FloatImage &mask, VectorXf 
     VectorXf br = getB_lc(imSrc, mask, 0);
     VectorXf bg = getB_lc(imSrc, mask, 1);
     VectorXf bb = getB_lc(imSrc, mask, 2);
-    
+
     // solve for x
     printf("Solve xr \n");
     FloatImage xr = solve_2D(im, A, br);
@@ -334,7 +334,7 @@ FloatImage local_changes(const FloatImage &im, const FloatImage &mask, VectorXf 
     FloatImage xg = solve_2D(im, A, bg);
     printf("Solve xb \n");
     FloatImage xb = solve_2D(im, A, bb);
-    
+
     // combine channels
     printf("Combine channels \n");
     for (int i = 0; i < im.width(); i++) {
@@ -362,7 +362,7 @@ VectorXf getB_local_illu(FloatImage &im, const FloatImage &mask, int channel){
             index = j * im.width() + i;
             
             if (mask(i, j, channel) < 0.5f) {
-                
+
                 b(index) = 0.0f;
                 if (i+1 < mask.width() && mask(i+1, j, channel) > 0.5f)
                     b(index) += im(i+1, j, channel);
@@ -396,6 +396,107 @@ VectorXf getB_local_illu(FloatImage &im, const FloatImage &mask, int channel){
         }
     }
     
+    return b;
+}
+
+
+
+
+FloatImage seamless_tiling(const FloatImage &im, bool isLog) {
+    FloatImage result(im), imSrc(im);
+
+    if(isLog)
+        imSrc = log10FloatImage(im);
+
+    // get matrix A, same for all channels
+    printf("Matrix A \n");
+    SparseMatrix<float> A = getA_2D(FloatImage(im.width(), im.height(), im.channels()));
+
+    // for each channels, get vector b
+    printf("Vector b \n");
+    VectorXf br = getB_tile(imSrc, 0);
+    VectorXf bg = getB_tile(imSrc, 1);
+    VectorXf bb = getB_tile(imSrc, 2);
+
+    // solve for x
+    printf("Solve xr \n");
+    FloatImage xr = solve_2D(im, A, br);
+    printf("Solve xg \n");
+    FloatImage xg = solve_2D(im, A, bg);
+    printf("Solve xb \n");
+    FloatImage xb = solve_2D(im, A, bb);
+
+    // combine channels
+    printf("Combine channels \n");
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            result(i, j, 0) = xr(i, j, 0);
+            result(i, j, 1) = xg(i, j, 0);
+            result(i, j, 2) = xb(i, j, 0);
+        }
+    }
+
+    if (isLog) {
+        return exp10FloatImage(result);
+    }else
+        return result;
+}
+
+
+
+VectorXf getB_tile(FloatImage &im, int channel) {
+    int N = im.width() * im.height(); // CHANGE ME
+    VectorXf b(N);
+
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            int index = j * im.width() + i;
+            b(index) = 0.0f;
+
+
+            // left
+            if (i == 0) {
+                b(index) += im(im.width() - 1, j, channel);
+                b(index) += (im(0, j, channel) + im(im.width() - 1, j, channel)) / 2.0f - im(im.width() - 1, j, channel);
+            }
+            else {
+                b(index) += im(i, j, channel) - im(i-1, j, channel);
+            }
+
+
+            // up
+            if (j == 0) {
+                b(index) += im(i, im.height() - 1, channel);
+                b(index) += (im(i, 0, channel) + im(i, im.height() - 1, channel)) / 2.0f - im(i, im.height() - 1, channel);
+            }
+            else {
+                b(index) += im(i, j, channel) - im(i, j-1, channel);
+            }
+
+
+            // right
+            if (i == im.width() - 1) {
+                b(index) += im(0, j, channel);
+                b(index) += (im(0, j, channel) + im(im.width() - 1, j, channel)) / 2.0f - im(0, j, channel);
+            }
+            else {
+                b(index) += im(i, j, channel) - im(i+1, j, channel);
+            }
+
+
+            // down
+            if (j == im.height() - 1) {
+                b(index) += im(i, 0, channel);
+                b(index) += (im(i, 0, channel) + im(i, im.height() - 1, channel)) / 2.0f - im(i, 0, channel);
+            }
+            else {
+                b(index) += im(i, j, channel) - im(i, j+1, channel);
+            }
+
+
+        }
+    }
+
     return b;
 }
 
@@ -453,6 +554,31 @@ float image_minnonzero(const FloatImage &im) {
     
     return min_non_zero; // change this
 }
+
+
+
+
+
+
+FloatImage tiledImage(const FloatImage &im, int m, int n) {
+    FloatImage result(im.width() * m, im.height() * n, im.channels());
+    for (int i = 0; i < result.width(); i++) {
+        for (int j = 0; j < result.height(); j++) {
+            for (int c = 0; c < result.channels(); c++) {
+                result(i, j, c) = im(i%im.width(), j%im.height(), c);
+            }
+        }
+    }
+    return result;
+}
+
+
+
+
+
+
+
+
 
 
 
