@@ -136,13 +136,13 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatI
 
                 // add boundary condition
                 b(d) = 0.0f;
-                if (maskDes.smartAccessor(i+1, j, 0) > 0.5f && i+1 < maskDes.width())
+                if (maskDes.smartAccessor(i+1, j, channel) > 0.5f && i+1 < maskDes.width())
                     b(d) += imDes(i+1, j, channel);
-                if (maskDes.smartAccessor(i-1, j, 0) > 0.5f && i-1 >= 0)
+                if (maskDes.smartAccessor(i-1, j, channel) > 0.5f && i-1 >= 0)
                     b(d) += imDes(i-1, j, channel);
-                if (maskDes.smartAccessor(i, j+1, 0) > 0.5f && j+1 < maskDes.height())
+                if (maskDes.smartAccessor(i, j+1, channel) > 0.5f && j+1 < maskDes.height())
                     b(d) += imDes(i, j+1, channel);
-                if (maskDes.smartAccessor(i, j-1, 0) > 0.5f && j-1 >= 0)
+                if (maskDes.smartAccessor(i, j-1, channel) > 0.5f && j-1 >= 0)
                     b(d) += imDes(i, j-1, channel);
 
                 // no mixed gradient, just use the gradient of source image

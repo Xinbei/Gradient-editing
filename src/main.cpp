@@ -55,9 +55,9 @@ void test_1D() {
 
 
 void test_2D() {
-    const FloatImage imSrc(DATA_DIR "/input/whale.png");
+    const FloatImage imSrc(DATA_DIR "/input/shark.png");
     const FloatImage imDes(DATA_DIR "/input/water.png");
-    const FloatImage maskSrc(DATA_DIR "/input/whale_mask.png");
+    const FloatImage maskSrc(DATA_DIR "/input/shark_mask.png");
     const FloatImage maskDes(DATA_DIR "/input/water_mask.png");
 
 //    FloatImage gradientSrc = laplacian(imSrc);
@@ -65,8 +65,10 @@ void test_2D() {
 //    gradientSrc.write(DATA_DIR "/output/gradientSrc.png");
 //    gradientDes.write(DATA_DIR "/output/gradientDes.png");
 
-    FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, false, true);
-    blend.write(DATA_DIR "/output/blend_whale_log.png");
+    bool mix = true;
+    bool log = true;
+    FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, mix, log);
+    blend.write(DATA_DIR "/output/blend_water_mixLog.png");
 }
 
 
@@ -142,10 +144,10 @@ void test_tile() {
 int main() {
     cout << "Hello World!" << endl;
 //    try { test_1D();}   catch(...) {cout << "test_1D Failed!" << endl;}
-//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
 //    try { test_local_change();}   catch(...) {cout << "test_local_change Failed!" << endl;}
-    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
+//    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
 
 //    try { test();}   catch(...) {cout << "test Failed!" << endl;}
     cout << "END" << endl;
