@@ -144,6 +144,16 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatI
                 if (maskDes.smartAccessor(i, j-1, channel) > 0.5f && j-1 >= 0)
                     b(d) += imDes(i, j-1, channel);
 
+                // add special boundary when the mask is close to edge of image
+                if (i == imDes.width()-1)
+                    b(d) += imDes.smartAccessor(i+1, j, channel);
+                if (i == 0)
+                    b(d) += imDes.smartAccessor(i-1, j, channel);
+                if (j == imDes.height() - 1)
+                    b(d) += imDes.smartAccessor(i, j+1, channel);
+                if (j == 0)
+                    b(d) += imDes.smartAccessor(i, j-1, channel);
+
                 // no mixed gradient, just use the gradient of source image
                 if (!mixGrad) {
                     float srcGrad = gradientSrc.smartAccessor(i+offset_x, j+offset_y, channel);

@@ -8,10 +8,10 @@
 using namespace std;
 
 void test_2D() {
-    const FloatImage imSrc(DATA_DIR "/input/shark.png");
-    const FloatImage imDes(DATA_DIR "/input/water.png");
-    const FloatImage maskSrc(DATA_DIR "/input/shark_mask.png");
-    const FloatImage maskDes(DATA_DIR "/input/water_mask.png");
+    const FloatImage imSrc(DATA_DIR "/input/rainbow.jpg");
+    const FloatImage imDes(DATA_DIR "/input/museum.jpg");
+    const FloatImage maskSrc(DATA_DIR "/input/rainbow_mask.png");
+    const FloatImage maskDes(DATA_DIR "/input/museum_mask.png");
 
 //    FloatImage gradientSrc = laplacian(imSrc);
 //    FloatImage gradientDes = laplacian(imDes);
@@ -21,7 +21,7 @@ void test_2D() {
     bool mix = true;
     bool log = true;
     FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, mix, log);
-    blend.write(DATA_DIR "/output/blend_water_mixLog.png");
+    blend.write(DATA_DIR "/output/blend_museum_mixLog.png");
 }
 
 
@@ -146,10 +146,10 @@ void test_tile() {
 
 int main() {
     cout << "Hello World!" << endl;
-//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
 //    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
-    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
+//    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
 
 //    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
 
