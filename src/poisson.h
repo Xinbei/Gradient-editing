@@ -24,8 +24,9 @@ FloatImage solve_2D(const FloatImage &imDes, const SparseMatrix<float> &A, const
 FloatImage textureFlattening(const FloatImage &im, const FloatImage &mask, const FloatImage &edgeIm, bool isLog = false);
 VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage &edgeIm, int channel);
 
-FloatImage local_changes(const FloatImage &im, const FloatImage &mask, VectorXf (*getB_lc)(FloatImage&, const FloatImage&, int), bool isLog=true);
-VectorXf getB_local_illu(FloatImage &im, const FloatImage &mask, int channel);
+FloatImage local_changes(const FloatImage &im, const FloatImage &mask, vector<VectorXf> b, bool isLog=true);
+VectorXf getB_local_illu(const FloatImage &im, const FloatImage &mask, int channel, float alpha, float beta);
+//VectorXf getB_local_color(const FloatImage &im, const FloatImage &mask, int channel, float rFactor, float gFactor, float bFactor);
 
 FloatImage log10FloatImage(const FloatImage &im);
 FloatImage exp10FloatImage(const FloatImage &im);

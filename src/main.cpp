@@ -3,6 +3,7 @@
 #include "filtering.h"
 #include "poisson.h"
 #include "utils.h"
+#include "a2.h"
 
 using namespace std;
 
@@ -117,12 +118,65 @@ void testTF(){
     flattened.write(DATA_DIR "/output/child_flattened.png");
 }
 
-void test_local_change(){
-    const FloatImage im(DATA_DIR "/input/orange.jpg");
-    const FloatImage mask(DATA_DIR "/input/orange_mask.png");
+void test_illu_change(){
+    //local illumination change
+    const FloatImage im(DATA_DIR "/input/man_under_exposed.png");
+    const FloatImage mask(DATA_DIR "/input/man_under_exposed_mask.png");
     
-    FloatImage illu_changed = local_changes(im, mask, getB_local_illu);
-    illu_changed.write(DATA_DIR "/output/orange_illu_change.png");
+    vector<VectorXf> b;
+    
+    for (int i = 0; i < 3; i++) {
+        b.push_back(getB_local_illu(im, mask, i, 0.2, 0.2));
+    }
+    
+    FloatImage illu_changed = local_changes(im, mask, b);
+    illu_changed.write(DATA_DIR "/output/man_illu_change.png");
+    
+}
+
+void test_color_change(){
+    //local color change
+    const FloatImage im(DATA_DIR "/input/tulip.jpg");
+    const FloatImage mask(DATA_DIR "/input/tulip_mask3.png");
+    
+    vector<VectorXf> b;
+    
+    //decolorization except selected region
+    const FloatImage imGray_one = color2gray(im);
+    FloatImage imGray(im);
+    
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            imGray(i, j, 0) = imGray_one(i, j, 0);
+            imGray(i, j, 1) = imGray_one(i, j, 0);
+            imGray(i, j, 2) = imGray_one(i, j, 0);
+        }
+    }
+    
+    for (int i = 0; i < 3; i++) {
+        b.push_back(getB_2D(im, imGray, mask, mask, i));
+    }
+
+    FloatImage decolored = local_changes(im, mask, b, false);
+    decolored.write(DATA_DIR "/output/tulip_decolored.png");
+    
+    //local color change
+    FloatImage imSrc(im);
+    
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            imSrc(i, j, 0) = im(i, j, 0)*0.5;
+            imSrc(i, j, 1) = im(i, j, 1)*2;
+            imSrc(i, j, 2) = im(i, j, 2)*2;
+        }
+    }
+    
+    for (int i = 0; i < 3; i++) {
+        b[i] = getB_2D(imSrc, im, mask, mask, i);
+    }
+    
+    FloatImage local_color_change = local_changes(im, mask, b, false);
+    local_color_change.write(DATA_DIR "/output/tulip_color_change.png");
 }
 
 
@@ -131,7 +185,9 @@ int main() {
 //    try { test_1D();}   catch(...) {cout << "test_1D Failed!" << endl;}
 //    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
-    try { test_local_change();}   catch(...) {cout << "test_local_change Failed!" << endl;}
+//    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
+    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
+
 
 //    try { test();}   catch(...) {cout << "test Failed!" << endl;}
     cout << "END" << endl;

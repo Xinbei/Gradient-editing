@@ -223,4 +223,5 @@ dependencies: \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/ext/eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/ext/eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/ext/eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
-  /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/utils.h
+  /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/utils.h \
+  /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/a2.h

@@ -97,8 +97,7 @@ SparseMatrix<float> getA_2D(const FloatImage &maskDes) {
 }
 
 
-VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatImage &maskSrc, const FloatImage &maskDes,
-                 int channel, bool mixGrad) {
+VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatImage &maskSrc, const FloatImage &maskDes, int channel, bool mixGrad) {
     int N = maskDes.width() * maskDes.height(); // CHANGE ME
     VectorXf b(N);
 
@@ -310,7 +309,7 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage 
     return b;
 }
 
-FloatImage local_changes(const FloatImage &im, const FloatImage &mask, VectorXf (*getB_lc)(FloatImage&, const FloatImage&, int), bool isLog){
+FloatImage local_changes(const FloatImage &im, const FloatImage &mask, vector<VectorXf> b, bool isLog){
     
     FloatImage result(im), imSrc(im);
     
@@ -321,19 +320,13 @@ FloatImage local_changes(const FloatImage &im, const FloatImage &mask, VectorXf 
     printf("Matrix A \n");
     SparseMatrix<float> A = getA_2D(mask);
     
-    // for each channels, get vector b
-    printf("Vector b \n");
-    VectorXf br = getB_lc(imSrc, mask, 0);
-    VectorXf bg = getB_lc(imSrc, mask, 1);
-    VectorXf bb = getB_lc(imSrc, mask, 2);
-    
     // solve for x
     printf("Solve xr \n");
-    FloatImage xr = solve_2D(im, A, br);
+    FloatImage xr = solve_2D(im, A, b[0]);
     printf("Solve xg \n");
-    FloatImage xg = solve_2D(im, A, bg);
+    FloatImage xg = solve_2D(im, A, b[1]);
     printf("Solve xb \n");
-    FloatImage xb = solve_2D(im, A, bb);
+    FloatImage xb = solve_2D(im, A, b[2]);
     
     // combine channels
     printf("Combine channels \n");
@@ -351,12 +344,26 @@ FloatImage local_changes(const FloatImage &im, const FloatImage &mask, VectorXf 
         return result;
 }
 
-VectorXf getB_local_illu(FloatImage &im, const FloatImage &mask, int channel){
-    int N = im.width()*im.height(), index = 0;
+VectorXf getB_local_illu(const FloatImage &im, const FloatImage &mask, int channel, float alpha, float beta){
+    int N = im.width()*im.height(), index = 0, count = 0;
     VectorXf b(N);
-    float alpha;
+    float gradNorm = 0.0;
     
     FloatImage gradient = laplacian(im);
+    
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            if (mask(i, j, 0) < 0.5f) {
+                float top = j > 0? im(i, j, channel) - im(i, j-1, channel):0;
+                float down = j+1 < im.height()? im(i, j, channel) - im(i, j+1, channel):0;
+                float left = i > 0? im(i, j, channel) - im(i-1, j, channel):0;
+                float right = i+1 < im.width()? im(i, j, channel) - im(i+1, j, channel):0;
+
+                gradNorm += sqrt(pow(top+down,2) + pow(left+right, 2));
+                count++;
+            }
+        }
+    }
     
     for (int i = 0; i < im.width(); i++) {
         for (int j = 0; j < im.height(); j++) {
@@ -380,43 +387,24 @@ VectorXf getB_local_illu(FloatImage &im, const FloatImage &mask, int channel){
                     float left = i > 0? im(i, j, channel) - im(i-1, j, channel):0;
                     float right = i+1 < im.width()? im(i, j, channel) - im(i+1, j, channel):0;
                     
-                    alpha = 0.2 * sqrt(pow(top+down, 2)+pow(left+right, 2)) / 2;
+//                    alpha = alpha * sqrt(pow(top+down, 2)+pow(left+right, 2)) / 2;
+                    alpha = alpha * gradNorm / count;
                     
-//                    if(top != 0)
-//                        b(index) += pow(alpha/abs(top), 0.2) * top;
-//                    
-//                    if(down != 0)
-//                        b(index) += pow(alpha/abs(down), 0.2) * down;
-//                    
-//                    if(left != 0)
-//                        b(index) += pow(alpha/abs(left), 0.2) * left;
-//                    
-//                    if(right != 0)
-//                        b(index) += pow(alpha/abs(right), 0.2) * right;
+                    if(top != 0)
+                        b(index) += pow(alpha/abs(top), beta) * top;
+                    
+                    if(down != 0)
+                        b(index) += pow(alpha/abs(down), beta) * down;
+                    
+                    if(left != 0)
+                        b(index) += pow(alpha/abs(left), beta) * left;
+                    
+                    if(right != 0)
+                        b(index) += pow(alpha/abs(right), beta) * right;
 
                     
-                    b(index) += powf(alpha/abs(gradient(i, j, channel)), 0.2) * gradient(i, j, channel);
+//                    b(index) += powf(alpha/abs(gradient(i, j, channel)), beta) * gradient(i, j, channel);
                 }
-                
-                
-            }else
-                b(index) = im(i, j, channel);
-        }
-    }
-    
-    return b;
-}
-
-VectorXf getB_local_color(FloatImage &im, const FloatImage &mask, int channel){
-    int N = im.width()*im.height(), index = 0;
-    VectorXf b(N);
-    
-    for (int i = 0; i < im.width(); i++) {
-        for (int j = 0; j < im.height(); j++) {
-            index = j * im.width() + i;
-            
-            if (mask(i, j, 0) < 0.5f) {
-                
                 
                 
             }else
