@@ -354,6 +354,7 @@ FloatImage local_changes(const FloatImage &im, const FloatImage &mask, VectorXf 
 VectorXf getB_local_illu(FloatImage &im, const FloatImage &mask, int channel){
     int N = im.width()*im.height(), index = 0;
     VectorXf b(N);
+    float alpha;
     
     FloatImage gradient = laplacian(im);
     
@@ -373,24 +374,51 @@ VectorXf getB_local_illu(FloatImage &im, const FloatImage &mask, int channel){
                 if (j-1 >= 0 && mask(i, j-1, channel) > 0.5f)
                     b(index) += im(i, j-1, channel);
                 
-                float top = j > 0? im(i, j, channel) - im(i, j-1, channel):0;
-                float down = j+1 < im.height()? im(i, j, channel) - im(i, j+1, channel):0;
-                float left = i > 0? im(i, j, channel) - im(i-1, j, channel):0;
-                float right = i+1 < im.width()? im(i, j, channel) - im(i+1, j, channel):0;
+                if (gradient(i, j, channel) != 0) {
+                    float top = j > 0? im(i, j, channel) - im(i, j-1, channel):0;
+                    float down = j+1 < im.height()? im(i, j, channel) - im(i, j+1, channel):0;
+                    float left = i > 0? im(i, j, channel) - im(i-1, j, channel):0;
+                    float right = i+1 < im.width()? im(i, j, channel) - im(i+1, j, channel):0;
+                    
+                    alpha = 0.2 * sqrt(pow(top+down, 2)+pow(left+right, 2)) / 2;
+                    
+//                    if(top != 0)
+//                        b(index) += pow(alpha/abs(top), 0.2) * top;
+//                    
+//                    if(down != 0)
+//                        b(index) += pow(alpha/abs(down), 0.2) * down;
+//                    
+//                    if(left != 0)
+//                        b(index) += pow(alpha/abs(left), 0.2) * left;
+//                    
+//                    if(right != 0)
+//                        b(index) += pow(alpha/abs(right), 0.2) * right;
+
+                    
+                    b(index) += powf(alpha/abs(gradient(i, j, channel)), 0.2) * gradient(i, j, channel);
+                }
                 
-                if(top != 0)
-                    b(index) += pow(0.2, 0.2) * pow(abs(top), -0.2) * top;
                 
-                if(down != 0)
-                    b(index) += pow(0.2, 0.2) * pow(abs(down), -0.2) * down;
+            }else
+                b(index) = im(i, j, channel);
+        }
+    }
+    
+    return b;
+}
+
+VectorXf getB_local_color(FloatImage &im, const FloatImage &mask, int channel){
+    int N = im.width()*im.height(), index = 0;
+    VectorXf b(N);
+    
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            index = j * im.width() + i;
+            
+            if (mask(i, j, 0) < 0.5f) {
                 
-                if(left != 0)
-                    b(index) += pow(0.2, 0.2) * pow(abs(left), -0.2) * left;
                 
-                if(right != 0)
-                    b(index) += pow(0.2, 0.2) * pow(abs(right), -0.2) * right;
                 
-                cout << b(index) << endl;
             }else
                 b(index) = im(i, j, channel);
         }
