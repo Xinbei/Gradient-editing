@@ -484,7 +484,7 @@ VectorXf getB_tile(FloatImage &im, int channel) {
             // left (west)
             if (i == 0) {
                 b(index) += im(im.width() - 1, j, channel); // boundary
-                b(index) += (im(0, j, channel) + im(im.width() - 1, j, channel)) / 2.0f - im(im.width() - 1, j, channel);
+                b(index) += im(i, j, channel) - (im(0, j, channel) + im(im.width() - 1, j, channel)) / 2.0f;
             }
             else {
                 b(index) += im(i, j, channel) - im(i-1, j, channel);
@@ -493,7 +493,7 @@ VectorXf getB_tile(FloatImage &im, int channel) {
             // up (north)
             if (j == 0) {
                 b(index) += im(i, im.height() - 1, channel); // boundary
-                b(index) += (im(i, 0, channel) + im(i, im.height() - 1, channel)) / 2.0f - im(i, im.height() - 1, channel);
+                b(index) += im(i, j, channel) - (im(i, 0, channel) + im(i, im.height() - 1, channel)) / 2.0f;
             }
             else {
                 b(index) += im(i, j, channel) - im(i, j-1, channel);
@@ -502,7 +502,7 @@ VectorXf getB_tile(FloatImage &im, int channel) {
             // right (east)
             if (i == im.width() - 1) {
                 b(index) += im(0, j, channel); // boundary
-                b(index) += (im(0, j, channel) + im(im.width() - 1, j, channel)) / 2.0f - im(0, j, channel);
+                b(index) += im(i, j, channel) - (im(0, j, channel) + im(im.width() - 1, j, channel)) / 2.0f;
             }
             else {
                 b(index) += im(i, j, channel) - im(i+1, j, channel);
@@ -511,7 +511,7 @@ VectorXf getB_tile(FloatImage &im, int channel) {
             // down (south)
             if (j == im.height() - 1) {
                 b(index) += im(i, 0, channel); // boundary
-                b(index) += (im(i, 0, channel) + im(i, im.height() - 1, channel)) / 2.0f - im(i, 0, channel);
+                b(index) += im(i, j, channel) - (im(i, 0, channel) + im(i, im.height() - 1, channel)) / 2.0f;
             }
             else {
                 b(index) += im(i, j, channel) - im(i, j+1, channel);
