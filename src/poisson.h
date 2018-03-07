@@ -26,7 +26,6 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage 
 
 FloatImage local_changes(const FloatImage &im, const FloatImage &mask, vector<VectorXf> b, bool isLog=true);
 VectorXf getB_local_illu(const FloatImage &im, const FloatImage &mask, int channel, float alpha, float beta);
-//VectorXf getB_local_color(const FloatImage &im, const FloatImage &mask, int channel, float rFactor, float gFactor, float bFactor);
 
 FloatImage seamless_tiling(const FloatImage &im, bool isLog=false);
 VectorXf getB_tile(FloatImage &im, int channel);
