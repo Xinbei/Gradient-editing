@@ -4,15 +4,16 @@
 #include "poisson.h"
 #include "utils.h"
 #include "a2.h"
+#include "laplacianBlend.h"
 
 using namespace std;
 
 void test_2D() {
-    const FloatImage imSrc(DATA_DIR "/input/rainbow.jpg");
-    const FloatImage imDes(DATA_DIR "/input/museum.jpg");
-    const FloatImage maskSrc(DATA_DIR "/input/rainbow_mask.png");
-    const FloatImage maskDes(DATA_DIR "/input/museum_mask.png");
-
+    const FloatImage imSrc(DATA_DIR "/input/IMG_3175.jpg");
+    const FloatImage imDes(DATA_DIR "/input/IMG_3174.jpg");
+    const FloatImage maskSrc(DATA_DIR "/input/IMG_3175_mask.png");
+    const FloatImage maskDes(DATA_DIR "/input/IMG_3174_mask.png");
+    
 //    FloatImage gradientSrc = laplacian(imSrc);
 //    FloatImage gradientDes = laplacian(imDes);
 //    gradientSrc.write(DATA_DIR "/output/gradientSrc.png");
@@ -21,7 +22,7 @@ void test_2D() {
     bool mix = true;
     bool log = true;
     FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, mix, log);
-    blend.write(DATA_DIR "/output/blend_museum_mixLog.png");
+    blend.write(DATA_DIR "/output/blend_highland.png");
 }
 
 
@@ -29,22 +30,21 @@ void testTF(){
     const FloatImage im(DATA_DIR "/input/child.jpg");
     const FloatImage mask(DATA_DIR "/input/child_mask.png");
     FloatImage edgeIm(DATA_DIR "/input/child_edge.png");
-//    FloatImage mask = gradientMagnitude(im);
     
 //    cout << edgeIm.channels() << endl;
-//    
+    
 //    for (int i = 0; i < edgeIm.width(); i++) {
 //        for (int j = 0; j < edgeIm.height(); j++) {
-        
-//            cout << edgeIm(i, j, 0) << endl;
-//            cout << edgeIm(i, j, 1) << endl;
-//            cout << edgeIm(i, j, 2) << endl;
-            
+//        
+//            cout << mask(i, j, 0) << endl;
+//            cout << mask(i, j, 1) << endl;
+//            cout << mask(i, j, 2) << endl;
+//            
 //            if(edgeIm(i, j, 0) > 0.1)
 //                edgeIm(i, j, 0) = 1;
 //            else
 //                edgeIm(i, j, 0) = 0;
-        
+//
 //        }
 //    }
     
@@ -55,16 +55,17 @@ void testTF(){
 void test_illu_change(){
     //local illumination change
     const FloatImage im(DATA_DIR "/input/turkey.png");
-    const FloatImage mask(DATA_DIR "/input/turkey_mask2.png");
+    const FloatImage mask(DATA_DIR "/input/turkey_mask.png");
     
     vector<VectorXf> b;
     
     for (int i = 0; i < 3; i++) {
-        b.push_back(getB_local_illu(log10FloatImage(im), mask, i, 0.05, 0.1));
+        b.push_back(getB_local_illu(log10FloatImage(im), mask, i, 0.01, 0.1));
     }
     
     FloatImage illu_changed = local_changes(im, mask, b);
-    illu_changed.write(DATA_DIR "/output/turkey_illu_change2.png");
+    illu_changed.write(DATA_DIR "/output/turkey_illu_change.png");
+    
     
 }
 
@@ -123,14 +124,41 @@ void test_tile() {
     tileIm2.write(DATA_DIR "/output/chalk_seamlessTile.png");
 }
 
+void test_laplacian(){
+    const FloatImage imSrc(DATA_DIR "/input/apple_right.jpg");
+    const FloatImage imDes(DATA_DIR "/input/orange_left.jpg");
+    const FloatImage mask(DATA_DIR "/input/laplacian_mask.jpg");
+    
+    FloatImage output = laplacian_blend(imSrc, imDes, mask);
+    output.write(DATA_DIR "/output/lap_blend_apple_orange.png");
+}
+
 
 void test_hdr() {
-    const FloatImage hdr(DATA_DIR "/input/hdr/belgium.hdr");
+    const FloatImage hdr(DATA_DIR "/input/hdr/ante2-out.hdr");
     exposure(hdr, 500).write(DATA_DIR "/output/gradient_ante2.png");
 
-    FloatImage gradHDR = gradient_hdr(exposure(hdr, 500));
-    cout << gradHDR.max() << " " << gradHDR.min() << endl;
-    gradHDR.write(DATA_DIR "/output/gradient_hdr.png");
+//    FloatImage gradHDR = gradient_hdr(exposure(hdr, 500));
+//    cout << gradHDR.max() << " " << gradHDR.min() << endl;
+//    gradHDR.write(DATA_DIR "/output/gradient_hdr.png");
+
+
+    FloatImage mask(hdr.width(), hdr.height(), hdr.channels());
+    for (int i = 0; i < hdr.width(); i++) {
+        for (int j = 0; j < hdr.height(); j++) {
+            for (int c = 0; c < hdr.channels(); c++) {
+                if (i==0 || j == 0 || i == hdr.width() - 1 || j == hdr.height() - 1) {
+                    mask(i, j, c) = 1;
+                }
+            }
+        }
+    }
+    vector<VectorXf> b;
+    for (int i = 0; i < 3; i++) {
+        b.push_back(getB_local_illu(log10FloatImage(hdr), mask, i, 0.01, 0.1));
+    }
+    FloatImage illu_changed = local_changes(hdr, mask, b);
+    illu_changed.write(DATA_DIR "/output/gradient_hdr.png");
 }
 
 
@@ -138,16 +166,14 @@ void test_hdr() {
 
 int main() {
     cout << "Hello World!" << endl;
-//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
-//    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
 //    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
 //    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
 
 //    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
 
-    try { test_hdr();}   catch(...) {cout << "test_tile Failed!" << endl;}
-
-
+//    try { test_hdr();}   catch(...) {cout << "test_tile Failed!" << endl;}
+//    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
     cout << "END" << endl;
 }

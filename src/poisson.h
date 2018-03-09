@@ -3,7 +3,7 @@
 
 #include "floatimage.h"
 #include "a2.h"
-#include "a6.h"
+#include "laplacianBlend.h"
 #include <iostream>
 #include <math.h>
 #include <Eigen/Dense>

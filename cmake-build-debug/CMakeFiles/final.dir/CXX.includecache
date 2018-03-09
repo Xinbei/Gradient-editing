@@ -1358,18 +1358,6 @@ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a2.h
 floatimage.h
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h
 
-C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a6.cpp
-a6.h
-C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a6.h
-iostream
--
-math.h
--
-
-C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a6.h
-floatimage.h
-C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h
-
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/array3D.h
 vector
 -
@@ -1404,6 +1392,24 @@ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/array3D.h
 string
 -
 
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.cpp
+stdio.h
+-
+laplacianBlend.h
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.h
+
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.h
+floatimage.h
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h
+iostream
+-
+math.h
+-
+filtering.h
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/filtering.h
+sstream
+-
+
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/main.cpp
 filtering.h
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/filtering.h
@@ -1413,6 +1419,8 @@ utils.h
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/utils.h
 a2.h
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a2.h
+laplacianBlend.h
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.h
 
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/poisson.cpp
 poisson.h
@@ -1425,8 +1433,8 @@ floatimage.h
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h
 a2.h
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a2.h
-a6.h
-C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a6.h
+laplacianBlend.h
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.h
 iostream
 -
 math.h

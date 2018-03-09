@@ -162,33 +162,6 @@ src/a2.cpp.s:
 	$(MAKE) -f CMakeFiles\final.dir\build.make CMakeFiles/final.dir/src/a2.cpp.s
 .PHONY : src/a2.cpp.s
 
-src/a6.obj: src/a6.cpp.obj
-
-.PHONY : src/a6.obj
-
-# target to build an object file
-src/a6.cpp.obj:
-	$(MAKE) -f CMakeFiles\final.dir\build.make CMakeFiles/final.dir/src/a6.cpp.obj
-.PHONY : src/a6.cpp.obj
-
-src/a6.i: src/a6.cpp.i
-
-.PHONY : src/a6.i
-
-# target to preprocess a source file
-src/a6.cpp.i:
-	$(MAKE) -f CMakeFiles\final.dir\build.make CMakeFiles/final.dir/src/a6.cpp.i
-.PHONY : src/a6.cpp.i
-
-src/a6.s: src/a6.cpp.s
-
-.PHONY : src/a6.s
-
-# target to generate assembly for a file
-src/a6.cpp.s:
-	$(MAKE) -f CMakeFiles\final.dir\build.make CMakeFiles/final.dir/src/a6.cpp.s
-.PHONY : src/a6.cpp.s
-
 src/filtering.obj: src/filtering.cpp.obj
 
 .PHONY : src/filtering.obj
@@ -242,6 +215,33 @@ src/floatimage.s: src/floatimage.cpp.s
 src/floatimage.cpp.s:
 	$(MAKE) -f CMakeFiles\common_lib.dir\build.make CMakeFiles/common_lib.dir/src/floatimage.cpp.s
 .PHONY : src/floatimage.cpp.s
+
+src/laplacianBlend.obj: src/laplacianBlend.cpp.obj
+
+.PHONY : src/laplacianBlend.obj
+
+# target to build an object file
+src/laplacianBlend.cpp.obj:
+	$(MAKE) -f CMakeFiles\final.dir\build.make CMakeFiles/final.dir/src/laplacianBlend.cpp.obj
+.PHONY : src/laplacianBlend.cpp.obj
+
+src/laplacianBlend.i: src/laplacianBlend.cpp.i
+
+.PHONY : src/laplacianBlend.i
+
+# target to preprocess a source file
+src/laplacianBlend.cpp.i:
+	$(MAKE) -f CMakeFiles\final.dir\build.make CMakeFiles/final.dir/src/laplacianBlend.cpp.i
+.PHONY : src/laplacianBlend.cpp.i
+
+src/laplacianBlend.s: src/laplacianBlend.cpp.s
+
+.PHONY : src/laplacianBlend.s
+
+# target to generate assembly for a file
+src/laplacianBlend.cpp.s:
+	$(MAKE) -f CMakeFiles\final.dir\build.make CMakeFiles/final.dir/src/laplacianBlend.cpp.s
+.PHONY : src/laplacianBlend.cpp.s
 
 src/main.obj: src/main.cpp.obj
 
@@ -310,15 +310,15 @@ help:
 	@echo ... src/a2.obj
 	@echo ... src/a2.i
 	@echo ... src/a2.s
-	@echo ... src/a6.obj
-	@echo ... src/a6.i
-	@echo ... src/a6.s
 	@echo ... src/filtering.obj
 	@echo ... src/filtering.i
 	@echo ... src/filtering.s
 	@echo ... src/floatimage.obj
 	@echo ... src/floatimage.i
 	@echo ... src/floatimage.s
+	@echo ... src/laplacianBlend.obj
+	@echo ... src/laplacianBlend.i
+	@echo ... src/laplacianBlend.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

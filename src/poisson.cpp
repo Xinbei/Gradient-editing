@@ -60,18 +60,15 @@ VectorXf getB_attG(const FloatImage &im, float beta) {
     FloatImage t(im.width(), im.height(), 1);
 
 //    FloatImage att = getAtt(im, beta);
-
-    int x = int(im.width() * 1 / 5.0f);
-    int y = int(im.height() * 1 / 5.0f);
-    FloatImage scaleIm = scale(im, x, y);
+    FloatImage scaleIm = downsample(im, 5.0f);
     FloatImage att = getAtt(scaleIm, beta);
 
     for (int k = 2; k <= 5; k++) {
-        x = int(im.width() * k / 5.0f);
-        y = int(im.height() * k / 5.0f);
-        FloatImage scaleIm = scale(gaussianBlur_box(im, 3, 1), x, y);
+        int x = int(im.width() * k / 5.0f);
+        int y = int(im.height() * k / 5.0f);
+        FloatImage scaleIm = downsample(gaussianBlur_seperable(im, 2), 5.0f / k);
         FloatImage scaleAtt = getAtt(scaleIm, beta);
-        att = scale(att, x, y) * scaleAtt;
+        att = upsample(att, x, y) * scaleAtt;
     }
 
 
@@ -274,21 +271,21 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatI
     for (int i = 0; i < imDes.width(); i++) {
         for (int j = 0; j < imDes.height(); j++) {
             int d = j * maskDes.width() + i;
-            if (maskDes(i, j, channel) < 0.5f) { // if is not white
+            if (maskDes(i, j, 0) < 0.5f) { // if is not white
 
                 // add boundary condition
                 b(d) = 0.0f;
                 // right
-                if (i == maskDes.width() - 1 || maskDes(i+1, j, channel) > 0.5f)
+                if (i == maskDes.width() - 1 || maskDes(i+1, j, 0) > 0.5f)
                     b(d) += imDes.smartAccessor(i+1, j, channel);
                 // left
                 if (i == 0 || maskDes(i-1, j, 0) > 0.5f)
                     b(d) += imDes.smartAccessor(i-1, j, channel);
                 // down
-                if (j == maskDes.height() - 1 || maskDes(i, j+1, channel) > 0.5f)
+                if (j == maskDes.height() - 1 || maskDes(i, j+1, 0) > 0.5f)
                     b(d) += imDes.smartAccessor(i, j+1, channel);
                 // up
-                if (j == 0 || maskDes(i, j-1, channel) > 0.5f)
+                if (j == 0 || maskDes(i, j-1, 0) > 0.5f)
                     b(d) += imDes.smartAccessor(i, j-1, channel);
 
                 // add special boundary when the mask is close to edge of image

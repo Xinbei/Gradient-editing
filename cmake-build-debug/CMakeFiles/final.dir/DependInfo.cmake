@@ -5,8 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a2.cpp" "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/CMakeFiles/final.dir/src/a2.cpp.obj"
-  "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a6.cpp" "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/CMakeFiles/final.dir/src/a6.cpp.obj"
   "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/filtering.cpp" "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/CMakeFiles/final.dir/src/filtering.cpp.obj"
+  "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.cpp" "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/CMakeFiles/final.dir/src/laplacianBlend.cpp.obj"
   "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/main.cpp" "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/CMakeFiles/final.dir/src/main.cpp.obj"
   "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/poisson.cpp" "C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/cmake-build-debug/CMakeFiles/final.dir/src/poisson.cpp.obj"
   )
