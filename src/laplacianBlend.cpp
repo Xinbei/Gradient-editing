@@ -17,6 +17,13 @@ FloatImage laplacian_blend(const FloatImage &imSrc, const FloatImage &imDes, con
     
     vector<FloatImage> imSrc_lap_py = laplacian_pyramid(imSrc, sigma);
     vector<FloatImage> imDes_lap_py = laplacian_pyramid(imDes, sigma);
+    
+    for (int i = 0; i < imSrc_lap_py.size(); i++) {
+        ostringstream ss;
+        ss << DATA_DIR "/output/laplacian_level" << i << ".png";
+        string filename = ss.str();
+        imSrc_lap_py[i].write(filename);
+    }
         
     vector<FloatImage> im_levels;
     
@@ -52,18 +59,18 @@ vector<FloatImage> gauss_pyramid(const FloatImage &im, float sigma){
     FloatImage im_gauss(im), im_down(im);
     float scale = 2;
     
-    int level = INT_MAX;
+    int level = 0;
     
     result.push_back(im);
     
-    while (level > 1) {
+    while (level < 4) {
         im_gauss = gaussianBlur_seperable(im_down, sigma);
         im_down = downsample(im_gauss, scale);
         result.push_back(im_down);
         
-        level = min(im_down.width(), im_down.height());
+//        level = min(im_down.width(), im_down.height());
 //        sigma = sigma*2;
-//        level++;
+        level++;
     }
     
     return result;
