@@ -408,13 +408,10 @@ VectorXf getB_local_illu(const FloatImage &im, const FloatImage &mask, int chann
                 
                 if(top != 0)
                     b(index) += pow(alpha * aver_grad_norm/abs(top), beta) * top;
-                
                 if(down != 0)
                     b(index) += pow(alpha * aver_grad_norm/abs(down), beta) * down;
-                
                 if(left != 0)
                     b(index) += pow(alpha * aver_grad_norm/abs(left), beta) * left;
-                
                 if(right != 0)
                     b(index) += pow(alpha * aver_grad_norm/abs(right), beta) * right;
                 
