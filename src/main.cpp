@@ -145,18 +145,18 @@ void test_tile() {
 }
 
 void test_laplacian(){
-    const FloatImage imSrc(DATA_DIR "/input/roy_lap.png");
-    const FloatImage imDes(DATA_DIR "/input/xixi.jpg");
-    const FloatImage mask(DATA_DIR "/input/xi_roy_lap_mask.png");
+    const FloatImage imSrc(DATA_DIR "/input/apple_right.jpg");
+    const FloatImage imDes(DATA_DIR "/input/orange_left.jpg");
+    const FloatImage mask(DATA_DIR "/input/laplacian_mask.jpg");
     
     FloatImage output = laplacian_blend(imSrc, imDes, mask);
-    output.write(DATA_DIR "/output/lap_blend_roy_xixi.png");
+    output.write(DATA_DIR "/output/lap_blend_apple_orange.png");
 }
 
 
 int main() {
     cout << "Hello World!" << endl;
-    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
 //    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
 //    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
@@ -164,6 +164,6 @@ int main() {
 //    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
 
 //    try { test();}   catch(...) {cout << "test Failed!" << endl;}
-//    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
+    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
     cout << "END" << endl;
 }
