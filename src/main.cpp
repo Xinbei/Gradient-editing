@@ -4,24 +4,25 @@
 #include "poisson.h"
 #include "utils.h"
 #include "a2.h"
+#include "laplacianBlend.h"
 
 using namespace std;
 
 void test_2D() {
-    const FloatImage imSrc(DATA_DIR "/input/shark.png");
-    const FloatImage imDes(DATA_DIR "/input/water.png");
-    const FloatImage maskSrc(DATA_DIR "/input/shark_mask.png");
-    const FloatImage maskDes(DATA_DIR "/input/water_mask.png");
-
+    const FloatImage imSrc(DATA_DIR "/input/roy.jpg");
+    const FloatImage imDes(DATA_DIR "/input/xixi.jpg");
+    const FloatImage maskSrc(DATA_DIR "/input/roy_mask.png");
+    const FloatImage maskDes(DATA_DIR "/input/xixi_mask.png");
+    
 //    FloatImage gradientSrc = laplacian(imSrc);
 //    FloatImage gradientDes = laplacian(imDes);
 //    gradientSrc.write(DATA_DIR "/output/gradientSrc.png");
 //    gradientDes.write(DATA_DIR "/output/gradientDes.png");
 
-    bool mix = true;
-    bool log = true;
+    bool mix = false;
+    bool log = false;
     FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, mix, log);
-    blend.write(DATA_DIR "/output/blend_water_mixLog.png");
+    blend.write(DATA_DIR "/output/blend_roy_xi.png");
 }
 
 
@@ -49,22 +50,21 @@ void testTF(){
     const FloatImage im(DATA_DIR "/input/child.jpg");
     const FloatImage mask(DATA_DIR "/input/child_mask.png");
     FloatImage edgeIm(DATA_DIR "/input/child_edge.png");
-//    FloatImage mask = gradientMagnitude(im);
     
 //    cout << edgeIm.channels() << endl;
-//    
+    
 //    for (int i = 0; i < edgeIm.width(); i++) {
 //        for (int j = 0; j < edgeIm.height(); j++) {
-        
-//            cout << edgeIm(i, j, 0) << endl;
-//            cout << edgeIm(i, j, 1) << endl;
-//            cout << edgeIm(i, j, 2) << endl;
-            
+//        
+//            cout << mask(i, j, 0) << endl;
+//            cout << mask(i, j, 1) << endl;
+//            cout << mask(i, j, 2) << endl;
+//            
 //            if(edgeIm(i, j, 0) > 0.1)
 //                edgeIm(i, j, 0) = 1;
 //            else
 //                edgeIm(i, j, 0) = 0;
-        
+//
 //        }
 //    }
     
@@ -75,16 +75,17 @@ void testTF(){
 void test_illu_change(){
     //local illumination change
     const FloatImage im(DATA_DIR "/input/turkey.png");
-    const FloatImage mask(DATA_DIR "/input/turkey_mask2.png");
+    const FloatImage mask(DATA_DIR "/input/turkey_mask.png");
     
     vector<VectorXf> b;
     
     for (int i = 0; i < 3; i++) {
-        b.push_back(getB_local_illu(log10FloatImage(im), mask, i, 0.05, 0.1));
+        b.push_back(getB_local_illu(log10FloatImage(im), mask, i, 0.01, 0.1));
     }
     
     FloatImage illu_changed = local_changes(im, mask, b);
-    illu_changed.write(DATA_DIR "/output/turkey_illu_change2.png");
+    illu_changed.write(DATA_DIR "/output/turkey_illu_change.png");
+    
     
 }
 
@@ -143,16 +144,26 @@ void test_tile() {
     tileIm2.write(DATA_DIR "/output/chalk_seamlessTile.png");
 }
 
+void test_laplacian(){
+    const FloatImage imSrc(DATA_DIR "/input/roy_lap.png");
+    const FloatImage imDes(DATA_DIR "/input/xixi.jpg");
+    const FloatImage mask(DATA_DIR "/input/xi_roy_lap_mask.png");
+    
+    FloatImage output = laplacian_blend(imSrc, imDes, mask);
+    output.write(DATA_DIR "/output/lap_blend_roy_xixi.png");
+}
+
 
 int main() {
     cout << "Hello World!" << endl;
-//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
-    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
+//    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
 //    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
 
 //    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
 
 //    try { test();}   catch(...) {cout << "test Failed!" << endl;}
+//    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
     cout << "END" << endl;
 }
