@@ -54,18 +54,18 @@ void testTF(){
 
 void test_illu_change(){
     //local illumination change
-    const FloatImage im(DATA_DIR "/input/belgium.hdr");
-//    const FloatImage mask(DATA_DIR "/input/turkey_mask.png");
-    const FloatImage mask(im.width(), im.height(), im.channels());
+
+    const FloatImage im(DATA_DIR "/input/IMG_1605.jpg");
+    const FloatImage mask(DATA_DIR "/input/IMG_1605_mask.png");
     
     vector<VectorXf> b;
     
     for (int i = 0; i < 3; i++) {
-        b.push_back(getB_local_illu(log10FloatImage(im), mask, i, 0.2, 0.1));
+        b.push_back(getB_local_illu(log10FloatImage(im), mask, i, 0.01, 0.2));
     }
     
     FloatImage illu_changed = local_changes(im, mask, b);
-    illu_changed.write(DATA_DIR "/output/belgium_illu_change.png");
+    illu_changed.write(DATA_DIR "/output/cat_illu_change.png");
     
     
 }
@@ -169,7 +169,7 @@ int main() {
     cout << "Hello World!" << endl;
 //    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
-//    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
+    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
 //    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
 
 //    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
