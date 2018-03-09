@@ -9,20 +9,20 @@
 using namespace std;
 
 void test_2D() {
-    const FloatImage imSrc(DATA_DIR "/input/IMG_3175.jpg");
-    const FloatImage imDes(DATA_DIR "/input/IMG_3174.jpg");
-    const FloatImage maskSrc(DATA_DIR "/input/IMG_3175_mask.png");
-    const FloatImage maskDes(DATA_DIR "/input/IMG_3174_mask.png");
+    const FloatImage imSrc(DATA_DIR "/input/rainbow.jpg");
+    const FloatImage imDes(DATA_DIR "/input/library.jpg");
+    const FloatImage maskSrc(DATA_DIR "/input/rainbow_mask.png");
+    const FloatImage maskDes(DATA_DIR "/input/library_mask.png");
     
 //    FloatImage gradientSrc = laplacian(imSrc);
 //    FloatImage gradientDes = laplacian(imDes);
 //    gradientSrc.write(DATA_DIR "/output/gradientSrc.png");
 //    gradientDes.write(DATA_DIR "/output/gradientDes.png");
 
-    bool mix = true;
-    bool log = true;
+    bool mix = false;
+    bool log = false;
     FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, mix, log);
-    blend.write(DATA_DIR "/output/blend_highland.png");
+    blend.write(DATA_DIR "/output/blend_library.png");
 }
 
 
@@ -54,9 +54,8 @@ void testTF(){
 
 void test_illu_change(){
     //local illumination change
-    const FloatImage im(DATA_DIR "/input/turkey.png");
-    const FloatImage mask(DATA_DIR "/input/turkey_mask.png");
-    
+    const FloatImage im(DATA_DIR "/input/IMG_1605.jpg");
+    const FloatImage mask(DATA_DIR "/input/IMG_1605_mask.png");
     vector<VectorXf> b;
     
     for (int i = 0; i < 3; i++) {
@@ -125,12 +124,12 @@ void test_tile() {
 }
 
 void test_laplacian(){
-    const FloatImage imSrc(DATA_DIR "/input/apple_right.jpg");
-    const FloatImage imDes(DATA_DIR "/input/orange_left.jpg");
-    const FloatImage mask(DATA_DIR "/input/laplacian_mask.jpg");
+    const FloatImage imSrc(DATA_DIR "/input/cat_lap.png");
+    const FloatImage imDes(DATA_DIR "/input/IMG_3178.jpg");
+    const FloatImage mask(DATA_DIR "/input/cat_lap_mask.png");
     
     FloatImage output = laplacian_blend(imSrc, imDes, mask);
-    output.write(DATA_DIR "/output/lap_blend_apple_orange.png");
+    output.write(DATA_DIR "/output/lap_blend_cat_cup.png");
 }
 
 
@@ -166,14 +165,13 @@ void test_hdr() {
 
 int main() {
     cout << "Hello World!" << endl;
-//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
-    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
+//    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
 //    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
 
 //    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
-
 //    try { test_hdr();}   catch(...) {cout << "test_tile Failed!" << endl;}
-//    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
+    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
     cout << "END" << endl;
 }

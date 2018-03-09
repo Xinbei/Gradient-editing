@@ -4,6 +4,9 @@ dependencies: \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/floatimage.h \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/array3D.h \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/exceptions.h \
+  /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/a2.h \
+  /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/laplacianBlend.h \
+  /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/filtering.h \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/ext/eigen/Eigen/Dense \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/ext/eigen/Eigen/Core \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/ext/eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
@@ -221,5 +224,4 @@ dependencies: \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/ext/eigen/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/ext/eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
   /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/ext/eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
-  /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/ext/eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
-  /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/filtering.h
+  /Users/xinbeifu/Documents/grad\ courses/computational\ photography/gradient\ editing/src/ext/eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h

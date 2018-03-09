@@ -135,16 +135,16 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatI
                 // add boundary condition
                 b(d) = 0.0f;
                 // right
-                if (i == maskDes.width() - 1 || maskDes(i+1, j, 0) > 0.5f)
+                if (i+1 < maskDes.width() && maskDes(i+1, j, 0) > 0.5f)
                     b(d) += imDes.smartAccessor(i+1, j, channel);
                 // left
-                if (i == 0 || maskDes(i-1, j, 0) > 0.5f)
+                if (i > 0 && maskDes(i-1, j, 0) > 0.5f)
                     b(d) += imDes.smartAccessor(i-1, j, channel);
                 // down
-                if (j == maskDes.height() - 1 || maskDes(i, j+1, 0) > 0.5f)
+                if (j+1 < maskDes.height() && maskDes(i, j+1, 0) > 0.5f)
                     b(d) += imDes.smartAccessor(i, j+1, channel);
                 // up
-                if (j == 0 || maskDes(i, j-1, 0) > 0.5f)
+                if (j > 0 && maskDes(i, j-1, 0) > 0.5f)
                     b(d) += imDes.smartAccessor(i, j-1, channel);
 
                 // add special boundary when the mask is close to edge of image
@@ -282,16 +282,16 @@ VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage 
             if (mask(i, j, channel) < 0.5f) {  // if mask(i, j, channel) is not white
                 b(index) = 0.0f;
                 // right
-                if (i == mask.width() - 1 || mask(i+1, j, channel) > 0.5f)
+                if (i+1 < mask.width() && mask(i+1, j, channel) > 0.5f)
                     b(index) += im.smartAccessor(i+1, j, channel);
                 // left
-                if (i == 0 || mask(i-1, j, 0) > 0.5f)
+                if (i > 0 && mask(i-1, j, 0) > 0.5f)
                     b(index) += im.smartAccessor(i-1, j, channel);
                 // down
-                if (j == mask.height() - 1 || mask(i, j+1, channel) > 0.5f)
+                if (j+1 < mask.height() && mask(i, j+1, channel) > 0.5f)
                     b(index) += im.smartAccessor(i, j+1, channel);
                 // up
-                if (j == 0 || mask(i, j-1, channel) > 0.5f)
+                if (j > 0 && mask(i, j-1, channel) > 0.5f)
                     b(index) += im.smartAccessor(i, j-1, channel);
 
                 // add gradient if it is on the boundary of edges
@@ -389,17 +389,17 @@ VectorXf getB_local_illu(const FloatImage &im, const FloatImage &mask, int chann
                 b(index) = 0.0f;
                 
                 // right
-                if (i == mask.width() - 1 || mask(i+1, j, channel) > 0.5f)
-                    b(index) += im.smartAccessor(i+1, j, channel);
+                if (i+1 < mask.width() && mask(i+1, j, channel) > 0.5f)
+                    b(index) += im(i+1, j, channel);
                 // left
-                if (i == 0 || mask(i-1, j, 0) > 0.5f)
-                    b(index) += im.smartAccessor(i-1, j, channel);
+                if (i > 0 && mask(i-1, j, 0) > 0.5f)
+                    b(index) += im(i-1, j, channel);
                 // down
-                if (j == mask.height() - 1 || mask(i, j+1, channel) > 0.5f)
-                    b(index) += im.smartAccessor(i, j+1, channel);
+                if (j+1 < mask.height() && mask(i, j+1, channel) > 0.5f)
+                    b(index) += im(i, j+1, channel);
                 // up
-                if (j == 0 || mask(i, j-1, channel) > 0.5f)
-                    b(index) += im.smartAccessor(i, j-1, channel);
+                if (j > 0 && mask(i, j-1, channel) > 0.5f)
+                    b(index) += im(i, j-1, channel);
                 
                 float top = j > 0? im(i, j, channel) - im(i, j-1, channel):0;
                 float down = j+1 < im.height()? im(i, j, channel) - im(i, j+1, channel):0;
