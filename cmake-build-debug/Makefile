@@ -216,6 +216,33 @@ src/floatimage.cpp.s:
 	$(MAKE) -f CMakeFiles\common_lib.dir\build.make CMakeFiles/common_lib.dir/src/floatimage.cpp.s
 .PHONY : src/floatimage.cpp.s
 
+src/laplacianBlend.obj: src/laplacianBlend.cpp.obj
+
+.PHONY : src/laplacianBlend.obj
+
+# target to build an object file
+src/laplacianBlend.cpp.obj:
+	$(MAKE) -f CMakeFiles\final.dir\build.make CMakeFiles/final.dir/src/laplacianBlend.cpp.obj
+.PHONY : src/laplacianBlend.cpp.obj
+
+src/laplacianBlend.i: src/laplacianBlend.cpp.i
+
+.PHONY : src/laplacianBlend.i
+
+# target to preprocess a source file
+src/laplacianBlend.cpp.i:
+	$(MAKE) -f CMakeFiles\final.dir\build.make CMakeFiles/final.dir/src/laplacianBlend.cpp.i
+.PHONY : src/laplacianBlend.cpp.i
+
+src/laplacianBlend.s: src/laplacianBlend.cpp.s
+
+.PHONY : src/laplacianBlend.s
+
+# target to generate assembly for a file
+src/laplacianBlend.cpp.s:
+	$(MAKE) -f CMakeFiles\final.dir\build.make CMakeFiles/final.dir/src/laplacianBlend.cpp.s
+.PHONY : src/laplacianBlend.cpp.s
+
 src/main.obj: src/main.cpp.obj
 
 .PHONY : src/main.obj
@@ -289,6 +316,9 @@ help:
 	@echo ... src/floatimage.obj
 	@echo ... src/floatimage.i
 	@echo ... src/floatimage.s
+	@echo ... src/laplacianBlend.obj
+	@echo ... src/laplacianBlend.i
+	@echo ... src/laplacianBlend.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

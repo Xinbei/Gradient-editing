@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/final.dir/src/filtering.cpp.obj"
   "CMakeFiles/final.dir/src/a2.cpp.obj"
   "CMakeFiles/final.dir/src/poisson.cpp.obj"
+  "CMakeFiles/final.dir/src/laplacianBlend.cpp.obj"
   "final.pdb"
   "final.exe"
   "final.exe.manifest"

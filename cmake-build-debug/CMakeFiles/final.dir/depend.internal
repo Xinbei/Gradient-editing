@@ -15,6 +15,13 @@ CMakeFiles/final.dir/src/filtering.cpp.obj
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/filtering.cpp
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/filtering.h
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h
+CMakeFiles/final.dir/src/laplacianBlend.cpp.obj
+ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/array3D.h
+ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/exceptions.h
+ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/filtering.h
+ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h
+ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.cpp
+ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.h
 CMakeFiles/final.dir/src/main.cpp.obj
  ../src/ext/eigen/Eigen/Cholesky
  ../src/ext/eigen/Eigen/Core
@@ -285,6 +292,7 @@ CMakeFiles/final.dir/src/main.cpp.obj
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/exceptions.h
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/filtering.h
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h
+ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.h
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/main.cpp
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/poisson.h
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/utils.h
@@ -553,9 +561,11 @@ CMakeFiles/final.dir/src/poisson.cpp.obj
  ../src/ext/eigen/Eigen/src/plugins/CommonCwiseUnaryOps.h
  ../src/ext/eigen/Eigen/src/plugins/MatrixCwiseBinaryOps.h
  ../src/ext/eigen/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a2.h
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/array3D.h
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/exceptions.h
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/filtering.h
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h
+ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.h
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/poisson.cpp
  C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/poisson.h

@@ -2,6 +2,8 @@
 #define FINAL_POISSON_H
 
 #include "floatimage.h"
+#include "a2.h"
+#include "laplacianBlend.h"
 #include <iostream>
 #include <math.h>
 #include <Eigen/Dense>
@@ -28,7 +30,13 @@ FloatImage local_changes(const FloatImage &im, const FloatImage &mask, vector<Ve
 VectorXf getB_local_illu(const FloatImage &im, const FloatImage &mask, int channel, float alpha, float beta);
 
 FloatImage seamless_tiling(const FloatImage &im, bool isLog=false);
-VectorXf getB_tile(FloatImage &im, int channel);
+VectorXf getB_tile(const FloatImage &im, int channel);
+
+
+FloatImage gradient_hdr(const FloatImage &im, float beta=0.8, bool isLog=true);
+VectorXf getB_attG(const FloatImage &im, float beta=0.8);
+FloatImage getAtt(const FloatImage &im, float beta=0.8);
+
 
 
 

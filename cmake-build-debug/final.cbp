@@ -172,6 +172,12 @@
 		<Unit filename="C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h">
 			<Option target="common_lib"/>
 		</Unit>
+		<Unit filename="C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.cpp">
+			<Option target="final"/>
+		</Unit>
+		<Unit filename="C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/laplacianBlend.h">
+			<Option target="final"/>
+		</Unit>
 		<Unit filename="C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/main.cpp">
 			<Option target="final"/>
 		</Unit>
