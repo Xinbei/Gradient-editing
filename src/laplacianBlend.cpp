@@ -17,14 +17,7 @@ FloatImage laplacian_blend(const FloatImage &imSrc, const FloatImage &imDes, con
     
     vector<FloatImage> imSrc_lap_py = laplacian_pyramid(imSrc, sigma);
     vector<FloatImage> imDes_lap_py = laplacian_pyramid(imDes, sigma);
-    
-    for (int i = 0; i < imSrc_lap_py.size(); i++) {
-        ostringstream ss;
-        ss << DATA_DIR "/output/laplacian_level" << i << ".png";
-        string filename = ss.str();
-        imSrc_lap_py[i].write(filename);
-    }
-        
+            
     vector<FloatImage> im_levels;
     
     for (int i = 0; i < imDes_lap_py.size(); i++)
