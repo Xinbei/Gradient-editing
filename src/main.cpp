@@ -54,8 +54,8 @@ void testTF(){
 
 void test_illu_change(){
     //local illumination change
-    const FloatImage im(DATA_DIR "/input/IMG_1605.jpg");
-    const FloatImage mask(DATA_DIR "/input/IMG_1605_mask.png");
+    const FloatImage im(DATA_DIR "/input/turkey.png");
+    const FloatImage mask(DATA_DIR "/input/turkey_mask.png");
     
     vector<VectorXf> b;
     
@@ -64,7 +64,7 @@ void test_illu_change(){
     }
     
     FloatImage illu_changed = local_changes(im, mask, b);
-    illu_changed.write(DATA_DIR "/output/cat_illu_change.png");
+    illu_changed.write(DATA_DIR "/output/turkey_illu_change.png");
     
     
 }
