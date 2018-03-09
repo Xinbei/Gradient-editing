@@ -25,26 +25,6 @@ void test_2D() {
 }
 
 
-void test() {
-    // https://eigen.tuxfamily.org/dox/group__TopicSparseSystems.html
-    Timer timer;
-    int N = 3;
-    SparseMatrix<float> A(N,N);
-    VectorXf b(N);
-
-    ConjugateGradient<SparseMatrix<float>, Lower|Upper> cg;
-    timer.reset();
-    cg.compute(A);
-    VectorXf x = cg.solve(b);
-
-    printf("ConjugateGradient took %3.5f seconds\n", timer.elapsed()/1000.f);
-    float relative_error = (A*x - b).norm(); // norm() is L2 norm
-    cout << "The relative error is:\n" << relative_error << endl;
-}
-
-
-
-
 void testTF(){
     const FloatImage im(DATA_DIR "/input/child.jpg");
     const FloatImage mask(DATA_DIR "/input/child_mask.png");
@@ -144,16 +124,30 @@ void test_tile() {
 }
 
 
+void test_hdr() {
+    const FloatImage hdr(DATA_DIR "/input/hdr/belgium.hdr");
+    exposure(hdr, 500).write(DATA_DIR "/output/gradient_ante2.png");
+
+    FloatImage gradHDR = gradient_hdr(exposure(hdr, 500));
+    cout << gradHDR.max() << " " << gradHDR.min() << endl;
+    gradHDR.write(DATA_DIR "/output/gradient_hdr.png");
+}
+
+
+
+
 int main() {
     cout << "Hello World!" << endl;
 //    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
 //    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
-    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
+//    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
 //    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
 
 //    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
 
-//    try { test();}   catch(...) {cout << "test Failed!" << endl;}
+    try { test_hdr();}   catch(...) {cout << "test_tile Failed!" << endl;}
+
+
     cout << "END" << endl;
 }

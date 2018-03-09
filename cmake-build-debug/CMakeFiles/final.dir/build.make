@@ -131,10 +131,35 @@ CMakeFiles/final.dir/src/a2.cpp.obj.provides: CMakeFiles/final.dir/src/a2.cpp.ob
 CMakeFiles/final.dir/src/a2.cpp.obj.provides.build: CMakeFiles/final.dir/src/a2.cpp.obj
 
 
+CMakeFiles/final.dir/src/a6.cpp.obj: CMakeFiles/final.dir/flags.make
+CMakeFiles/final.dir/src/a6.cpp.obj: CMakeFiles/final.dir/includes_CXX.rsp
+CMakeFiles/final.dir/src/a6.cpp.obj: ../src/a6.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\SAMSUNG\Documents\GitHub\Gradient-editing\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/final.dir/src/a6.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\final.dir\src\a6.cpp.obj -c C:\Users\SAMSUNG\Documents\GitHub\Gradient-editing\src\a6.cpp
+
+CMakeFiles/final.dir/src/a6.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/final.dir/src/a6.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\SAMSUNG\Documents\GitHub\Gradient-editing\src\a6.cpp > CMakeFiles\final.dir\src\a6.cpp.i
+
+CMakeFiles/final.dir/src/a6.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/final.dir/src/a6.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\SAMSUNG\Documents\GitHub\Gradient-editing\src\a6.cpp -o CMakeFiles\final.dir\src\a6.cpp.s
+
+CMakeFiles/final.dir/src/a6.cpp.obj.requires:
+
+.PHONY : CMakeFiles/final.dir/src/a6.cpp.obj.requires
+
+CMakeFiles/final.dir/src/a6.cpp.obj.provides: CMakeFiles/final.dir/src/a6.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\final.dir\build.make CMakeFiles/final.dir/src/a6.cpp.obj.provides.build
+.PHONY : CMakeFiles/final.dir/src/a6.cpp.obj.provides
+
+CMakeFiles/final.dir/src/a6.cpp.obj.provides.build: CMakeFiles/final.dir/src/a6.cpp.obj
+
+
 CMakeFiles/final.dir/src/poisson.cpp.obj: CMakeFiles/final.dir/flags.make
 CMakeFiles/final.dir/src/poisson.cpp.obj: CMakeFiles/final.dir/includes_CXX.rsp
 CMakeFiles/final.dir/src/poisson.cpp.obj: ../src/poisson.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\SAMSUNG\Documents\GitHub\Gradient-editing\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/final.dir/src/poisson.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\SAMSUNG\Documents\GitHub\Gradient-editing\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/final.dir/src/poisson.cpp.obj"
 	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\final.dir\src\poisson.cpp.obj -c C:\Users\SAMSUNG\Documents\GitHub\Gradient-editing\src\poisson.cpp
 
 CMakeFiles/final.dir/src/poisson.cpp.i: cmake_force
@@ -161,6 +186,7 @@ final_OBJECTS = \
 "CMakeFiles/final.dir/src/main.cpp.obj" \
 "CMakeFiles/final.dir/src/filtering.cpp.obj" \
 "CMakeFiles/final.dir/src/a2.cpp.obj" \
+"CMakeFiles/final.dir/src/a6.cpp.obj" \
 "CMakeFiles/final.dir/src/poisson.cpp.obj"
 
 # External object files for target final
@@ -169,13 +195,14 @@ final_EXTERNAL_OBJECTS =
 final.exe: CMakeFiles/final.dir/src/main.cpp.obj
 final.exe: CMakeFiles/final.dir/src/filtering.cpp.obj
 final.exe: CMakeFiles/final.dir/src/a2.cpp.obj
+final.exe: CMakeFiles/final.dir/src/a6.cpp.obj
 final.exe: CMakeFiles/final.dir/src/poisson.cpp.obj
 final.exe: CMakeFiles/final.dir/build.make
 final.exe: libcommon_lib.a
 final.exe: CMakeFiles/final.dir/linklibs.rsp
 final.exe: CMakeFiles/final.dir/objects1.rsp
 final.exe: CMakeFiles/final.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\SAMSUNG\Documents\GitHub\Gradient-editing\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable final.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\SAMSUNG\Documents\GitHub\Gradient-editing\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable final.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\final.dir\link.txt --verbose=$(VERBOSE)
 	"C:\Program Files\JetBrains\CLion 2017.3.1\bin\cmake\bin\cmake.exe" -E make_directory C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/data/output
 
@@ -187,6 +214,7 @@ CMakeFiles/final.dir/build: final.exe
 CMakeFiles/final.dir/requires: CMakeFiles/final.dir/src/main.cpp.obj.requires
 CMakeFiles/final.dir/requires: CMakeFiles/final.dir/src/filtering.cpp.obj.requires
 CMakeFiles/final.dir/requires: CMakeFiles/final.dir/src/a2.cpp.obj.requires
+CMakeFiles/final.dir/requires: CMakeFiles/final.dir/src/a6.cpp.obj.requires
 CMakeFiles/final.dir/requires: CMakeFiles/final.dir/src/poisson.cpp.obj.requires
 
 .PHONY : CMakeFiles/final.dir/requires

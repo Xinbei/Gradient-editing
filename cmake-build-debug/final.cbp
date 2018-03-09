@@ -148,6 +148,12 @@
 		<Unit filename="C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a2.h">
 			<Option target="final"/>
 		</Unit>
+		<Unit filename="C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a6.cpp">
+			<Option target="final"/>
+		</Unit>
+		<Unit filename="C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a6.h">
+			<Option target="final"/>
+		</Unit>
 		<Unit filename="C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/array3D.h">
 			<Option target="common_lib"/>
 		</Unit>

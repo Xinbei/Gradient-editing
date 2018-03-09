@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/final.dir/src/main.cpp.obj"
   "CMakeFiles/final.dir/src/filtering.cpp.obj"
   "CMakeFiles/final.dir/src/a2.cpp.obj"
+  "CMakeFiles/final.dir/src/a6.cpp.obj"
   "CMakeFiles/final.dir/src/poisson.cpp.obj"
   "final.pdb"
   "final.exe"

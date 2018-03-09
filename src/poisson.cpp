@@ -6,6 +6,149 @@ using namespace std;
 
 
 
+
+
+
+
+FloatImage gradient_hdr(const FloatImage &im, float beta, bool isLog) {
+    FloatImage result(im), imSrc(im);
+
+    if(isLog)
+        imSrc = log10FloatImage(im);
+
+    // get matrix A
+    printf("Matrix A \n");
+    SparseMatrix<float> A = getA_2D(FloatImage(im.width(), im.height(), im.channels()));
+
+    vector<FloatImage> lumiColor = lumiChromi(imSrc);
+
+    // for lumi, get vector b
+    printf("Vector b \n");
+    VectorXf b = getB_attG(lumiColor[0], beta);
+
+    // solve for x
+//    printf("Solve lumi \n");
+//    lumiColor[0] = solve_2D(im, A, b);
+
+    // combine channels
+    printf("Combine channels \n");
+    result = lumiChromi2rgb(lumiColor[0], lumiColor[1]);
+
+    if (isLog) {
+        return exp10FloatImage(result);
+    }else
+        return result;
+}
+
+
+
+
+VectorXf getB_attG(const FloatImage &im, float beta) {
+    int N = im.width() * im.height();
+    VectorXf b(N);
+
+    FloatImage gradient = laplacian(im);
+
+    FloatImage dH_x(im.width(), im.height(), 1);
+    FloatImage dH_y(im.width(), im.height(), 1);
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            dH_x(i, j, 0) = im.smartAccessor(i, j, 0) - im.smartAccessor(i-1, j, 0);
+            dH_y(i, j, 0) = im.smartAccessor(i, j, 0) - im.smartAccessor(i, j-1, 0);
+        }
+    }
+    FloatImage t(im.width(), im.height(), 1);
+
+//    FloatImage att = getAtt(im, beta);
+
+    int x = int(im.width() * 1 / 5.0f);
+    int y = int(im.height() * 1 / 5.0f);
+    FloatImage scaleIm = scale(im, x, y);
+    FloatImage att = getAtt(scaleIm, beta);
+
+    for (int k = 2; k <= 5; k++) {
+        x = int(im.width() * k / 5.0f);
+        y = int(im.height() * k / 5.0f);
+        FloatImage scaleIm = scale(gaussianBlur_box(im, 3, 1), x, y);
+        FloatImage scaleAtt = getAtt(scaleIm, beta);
+        att = scale(att, x, y) * scaleAtt;
+    }
+
+
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            int d = j * im.width() + i;
+            b(d) = 0.0f;
+
+            // add boundary when the at edge of image
+            if (i == im.width()-1)
+                b(d) += im.smartAccessor(i+1, j, 0);
+            if (i == 0)
+                b(d) += im.smartAccessor(i-1, j, 0);
+            if (j == im.height() - 1)
+                b(d) += im.smartAccessor(i, j+1, 0);
+            if (j == 0)
+                b(d) += im.smartAccessor(i, j-1, 0);
+
+            b(d) += dH_x.smartAccessor(i, j, 0) * att.smartAccessor(i, j, 0) -
+                    dH_x.smartAccessor(i+1, j, 0) * att.smartAccessor(i+1, j, 0) +
+                    dH_y.smartAccessor(i, j, 0) * att.smartAccessor(i, j, 0) -
+                    dH_y.smartAccessor(i, j+1, 0) * att.smartAccessor(i, j+1, 0);
+
+            t(i, j, 0) = b(d);
+        }
+    }
+
+    gradient.write(DATA_DIR "/output/gradient_hdr_gradient.png");
+    t.write(DATA_DIR "/output/gradient_hdr_attGradient.png");
+    att.write(DATA_DIR "/output/gradient_hdr_attenuation.png");
+    return b;
+}
+
+
+
+
+FloatImage getAtt(const FloatImage &im, float beta) {
+    float alpha = 0.0f;
+
+    FloatImage dH_x(im.width(), im.height(), 1);
+    FloatImage dH_y(im.width(), im.height(), 1);
+    FloatImage att(im.width(), im.height(), 1);
+
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            dH_x(i, j, 0) = im.smartAccessor(i, j, 0) - im.smartAccessor(i-1, j, 0);
+            dH_y(i, j, 0) = im.smartAccessor(i, j, 0) - im.smartAccessor(i, j-1, 0);
+            float h_mag = sqrt(pow(dH_x(i, j, 0), 2.0f) + pow(dH_y(i, j, 0), 2.0f));
+            alpha += h_mag;
+
+        }
+    }
+
+    alpha = 0.1f * alpha/(im.width()*im.height());
+
+    for (int i = 0; i < im.width(); i++) {
+        for (int j = 0; j < im.height(); j++) {
+            float h_mag = sqrt(pow(dH_x(i, j, 0), 2.0f) + pow(dH_y(i, j, 0), 2.0f));
+            att(i, j, 0) = alpha / (h_mag+1e-9f) * (pow(h_mag/alpha, beta));
+        }
+    }
+
+    return att;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 FloatImage Poisson_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes,
                       bool mixGrad, bool isLog) {
 
@@ -472,7 +615,7 @@ FloatImage seamless_tiling(const FloatImage &im, bool isLog) {
 
 
 
-VectorXf getB_tile(FloatImage &im, int channel) {
+VectorXf getB_tile(const FloatImage &im, int channel) {
     int N = im.width() * im.height(); // CHANGE ME
     VectorXf b(N);
 
@@ -600,8 +743,4 @@ FloatImage laplacian (const FloatImage &im, bool clamp) {
 
     return imFilter;
 }
-
-
-
-
 

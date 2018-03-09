@@ -1358,6 +1358,18 @@ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a2.h
 floatimage.h
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h
 
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a6.cpp
+a6.h
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a6.h
+iostream
+-
+math.h
+-
+
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a6.h
+floatimage.h
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h
+
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/array3D.h
 vector
 -
@@ -1411,6 +1423,10 @@ C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/filtering.h
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/poisson.h
 floatimage.h
 C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/floatimage.h
+a2.h
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a2.h
+a6.h
+C:/Users/SAMSUNG/Documents/GitHub/Gradient-editing/src/a6.h
 iostream
 -
 math.h

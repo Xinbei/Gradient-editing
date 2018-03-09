@@ -32,7 +32,7 @@ add_library(common_lib STATIC
 )
 SOURCE_GROUP("src\\ext\\stb" FILES ${ext_stb_srcs})
 
-set(final_srcs src/main.cpp src/filtering.cpp src/a2.cpp src/poisson.cpp src/poisson.cpp src/poisson.h)
+set(final_srcs src/main.cpp src/filtering.cpp src/a2.cpp src/a6.cpp src/poisson.cpp src/poisson.cpp src/poisson.h)
 add_executable(final ${final_srcs})
 target_link_libraries(final common_lib)
 SOURCE_GROUP("src" FILES ${final_srcs})
