@@ -23,21 +23,17 @@ SparseMatrix<float> getA_2D(const FloatImage &maskDes);
 VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes, const FloatImage &maskSrc, const FloatImage &maskDes, int channel, bool mixGrad=false);
 FloatImage solve_2D(const FloatImage &imDes, const SparseMatrix<float> &A, const VectorXf &b);
 
+// texture flattening
 FloatImage textureFlattening(const FloatImage &im, const FloatImage &mask, const FloatImage &edgeIm, bool isLog=false);
 VectorXf getB_tf(const FloatImage &im, const FloatImage &mask, const FloatImage &edgeIm, int channel);
 
+// local illumination and color change
 FloatImage local_changes(const FloatImage &im, const FloatImage &mask, vector<VectorXf> b, bool isLog=true);
 VectorXf getB_local_illu(const FloatImage &im, const FloatImage &mask, int channel, float alpha, float beta);
 
+// seamless tiling
 FloatImage seamless_tiling(const FloatImage &im, bool isLog=false);
 VectorXf getB_tile(const FloatImage &im, int channel);
-
-
-FloatImage gradient_hdr(const FloatImage &im, float beta=0.8, bool isLog=true);
-VectorXf getB_attG(const FloatImage &im, float beta=0.8);
-FloatImage getAtt(const FloatImage &im, float beta=0.8);
-
-
 
 
 // utility function
