@@ -3,14 +3,14 @@ The main implementation of the Poisson image editing is in the "poisson.cpp". <b
 We also implemented Laplacian blend which is in "laplacianBlend.cpp". <br \>
 All source images are in "/data/input/".
 
-##Division of labor
+## Division of labor
 * poisson image blending (Annie)
 * texture flattening (Xinbei)
 * local illumination and color change (Xinbei)
 * seamless tiling (Annie)
 * Laplacian blend (Xinbei)
 
-##How to run the code
+## How to run the code
 * poisson image blending: 
 ```
 test_2D()
@@ -42,7 +42,7 @@ test_laplacian()
 ```
 needs a source image, a target image, and a mask.
 
-##Supplement
+## Supplement
 The mask of poisson image editing need not to be overlap exactly. In other word, you can paste the left top of the source image
 to right bottom of the target image, depends on your mask.
 However, the mask of laplacian blend has to match. In other word, you can only paste the left top of the source image to the same
