@@ -1,6 +1,6 @@
 # Image Blending
-The main implementation of the Poisson image editing is in the "poisson.cpp". <br \>
-We also implemented Laplacian blend which is in "laplacianBlend.cpp". <br \>
+The main implementation of the Poisson image editing is in the "poisson.cpp".
+We also implemented Laplacian blend which is in "laplacianBlend.cpp".
 All source images are in "/data/input/".
 
 ## Division of labor
@@ -11,50 +11,40 @@ All source images are in "/data/input/".
 * Laplacian blend (Xinbei)
 
 ## Function description
-* 
 ```
 Poisson_2D(FloatImage sourceIm, FloatImage destIm, FloatImage sourceMask, FloatImage destMask, bool isMix, bool isLog)
 ```
 The main function for poisson blending.
-* 
 ```
 FloatImage textureFlattening(FloatImage image, FloatImage mask, FloatImage edgeIm, bool isLog)
 ```
 Function for texture flattening.
-* 
 ```
 FloatImage local_changes(FloatImage image, FloatImage mask, bool isLog)
 ```
 Function for local illumination and color change.
-* 
 ```
 FloatImage seamless_tiling(FloatImage image, FloatImage mask, bool isLog)
 ```
 Function for seamless_tiling.
-* 
 ```
 FloatImage laplacian_blend(FloatImage sourceIm, FloatImage destIm, FloatImage mask)
 ```
 The main function for laplacian pyramid blending.
-* 
 ```
 FloatImage laplacian_pyramid(FloatImage image, float sigma)
 ```
 Function for calculating laplacian pyramid levels.
-* 
 ```
 FloatImage gauss_pyramid(FloatImage image, float sigma)
 ```
 Function for calculating gaussian pyramid levels.
-* 
 ```
 FloatImage collapse(vector<FloatImage> im_levels)
 ```
 Function for reconstruct original image.
-* 
 ```
 FloatImage downsample(const FloatImage &im, float scale)
-* 
 ```
 Linear downsampling
 ```
