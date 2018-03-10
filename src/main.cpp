@@ -114,13 +114,13 @@ void test_color_change(){
 }
 
 void test_tile() {
-    const FloatImage im(DATA_DIR "/input/chalk.png");
+    const FloatImage im(DATA_DIR "/input/tile4.png");
     FloatImage tileIm = tiledImage(im);
-    tileIm.write(DATA_DIR "/output/chalk_original.png");
+    tileIm.write(DATA_DIR "/output/tile4_original.png");
 
     FloatImage im2 = seamless_tiling(im, true);
     FloatImage tileIm2 = tiledImage(im2);
-    tileIm2.write(DATA_DIR "/output/chalk_seamlessTile.png");
+    tileIm2.write(DATA_DIR "/output/tile4_seamlessTile.png");
 }
 
 void test_laplacian(){
@@ -165,13 +165,13 @@ void test_hdr() {
 
 int main() {
     cout << "Hello World!" << endl;
-    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
 //    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
 //    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
 
-//    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
+    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
 //    try { test_hdr();}   catch(...) {cout << "test_tile Failed!" << endl;}
-    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
+//    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
     cout << "END" << endl;
 }
