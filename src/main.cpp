@@ -121,8 +121,6 @@ void test_laplacian(){
 }
 
 
-
-
 int main() {
     cout << "Hello World!" << endl;
     try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}

@@ -3,7 +3,7 @@
 # Image Blending
 The main implementation of the Poisson image editing is in the "poisson.cpp".
 We also implemented Laplacian blend which is in "laplacianBlend.cpp".
-All source images are in "/data/input/".
+All source images are in "/data/input/". Previous results were all put in "/data/prev-output", your new results will be in "/data/output".
 
 ## Division of labor
 * Poisson image blending (Annie)
