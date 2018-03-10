@@ -60,7 +60,7 @@ vector<FloatImage> gauss_pyramid(const FloatImage &im, float sigma){
     FloatImage im_gauss(im), im_down(im);
     float scale = 2;
     
-    int level = INT_MAX;
+    int level = INFINITY;
     
     result.push_back(im);
     
