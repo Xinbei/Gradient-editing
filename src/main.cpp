@@ -114,13 +114,13 @@ void test_color_change(){
 }
 
 void test_tile() {
-    const FloatImage im(DATA_DIR "/input/tile4.png");
+    const FloatImage im(DATA_DIR "/input/tile2.jpg");
     FloatImage tileIm = tiledImage(im);
-    tileIm.write(DATA_DIR "/output/tile4_original.png");
+    tileIm.write(DATA_DIR "/output/tile2_original.png");
 
     FloatImage im2 = seamless_tiling(im, true);
     FloatImage tileIm2 = tiledImage(im2);
-    tileIm2.write(DATA_DIR "/output/tile4_seamlessTile.png");
+    tileIm2.write(DATA_DIR "/output/tile2_seamlessTile.png");
 }
 
 void test_laplacian(){
