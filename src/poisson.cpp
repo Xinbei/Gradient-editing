@@ -166,29 +166,25 @@ VectorXf getB_2D(const FloatImage &imSrc, const FloatImage &imDes,  const FloatI
                 else {
                     // left gradient
                     if (i > 0) {
-                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) -
-                                        imSrc.smartAccessor(i+offset_x-1, j+offset_y, channel, true);
+                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x-1, j+offset_y, channel, true);
                         float desGrad = imDes(i, j, channel) - imDes(i-1, j, channel);
                         b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
                     }
                     // right gradient
                     if (i+1 < maskDes.width()) {
-                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) -
-                                        imSrc.smartAccessor(i+offset_x+1, j+offset_y, channel, true);
+                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x+1, j+offset_y, channel, true);
                         float desGrad = imDes(i, j, channel) - imDes(i+1, j, channel);
                         b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
                     }
                     // up gradient
                     if (j > 0) {
-                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) -
-                                        imSrc.smartAccessor(i+offset_x, j+offset_y-1, channel, true);
+                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x, j+offset_y-1, channel, true);
                         float desGrad = imDes(i, j, channel) - imDes(i, j-1, channel);
                         b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
                     }
                     // down gradient
                     if (j+1 < maskDes.height()) {
-                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) -
-                                        imSrc.smartAccessor(i+offset_x, j+offset_y+1, channel, true);
+                        float srcGrad = imSrc.smartAccessor(i+offset_x, j+offset_y, channel, true) - imSrc.smartAccessor(i+offset_x, j+offset_y+1, channel, true);
                         float desGrad = imDes(i, j, channel) - imDes(i, j+1, channel);
                         b(d) += fabsf(desGrad) > fabsf(srcGrad) ? desGrad:srcGrad;
                     }
