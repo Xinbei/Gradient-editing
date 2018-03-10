@@ -13,33 +13,40 @@ FloatImage laplacian_blend(const FloatImage &imSrc, const FloatImage &imDes, con
     FloatImage result(imDes.width(), imDes.height(), imDes.channels());
     float sigma = 3.0;
     
+    //calculates gaussian pyramid for mask
     vector<FloatImage> mask_gauss_py = gauss_pyramid(mask, sigma);
     
+    //calculates laplacian pyramids for source image and target image respectively
     vector<FloatImage> imSrc_lap_py = laplacian_pyramid(imSrc, sigma);
     vector<FloatImage> imDes_lap_py = laplacian_pyramid(imDes, sigma);
             
     vector<FloatImage> im_levels;
     
+    //blend every level
     for (int i = 0; i < imDes_lap_py.size(); i++)
     {
         im_levels.push_back(mask_gauss_py[i] * imDes_lap_py[i] + (1 - mask_gauss_py[i]) * imSrc_lap_py[i]);
     }
     
+    //collapses all levels
     result = collapse(im_levels);
     
     return result;
 }
 
-//TODO: deal with sigma
+//calculates laplacian pyramid levels
 vector<FloatImage> laplacian_pyramid(const FloatImage &im, float sigma){
     vector<FloatImage> result;
     
+    //get gaussian pyramid first
     vector<FloatImage> im_gauss_py = gauss_pyramid(im, sigma);
     
     for (int i = 0; i < im_gauss_py.size(); i++) {
+        //if it's the last level, just assign it
         if (i == im_gauss_py.size() - 1) {
             result.push_back(im_gauss_py[i]);
         }else{
+            //gaussian level i - gaussian level i+1
             result.push_back(im_gauss_py[i] - upsample(im_gauss_py[i+1], im_gauss_py[i].width(), im_gauss_py[i].height()));
         }
     }
@@ -47,23 +54,25 @@ vector<FloatImage> laplacian_pyramid(const FloatImage &im, float sigma){
     return result;
 }
 
+//calcuates gaussian pyramid
 vector<FloatImage> gauss_pyramid(const FloatImage &im, float sigma){
     vector<FloatImage> result;
     FloatImage im_gauss(im), im_down(im);
     float scale = 2;
     
-    int level = 0;
+    int level = INT_MAX;
     
     result.push_back(im);
     
-    while (level < 4) {
+    while (level > 2) {
+        //do a gaussian blur first
         im_gauss = gaussianBlur_seperable(im_down, sigma);
+        
+        //then do downsampling
         im_down = downsample(im_gauss, scale);
         result.push_back(im_down);
         
-//        level = min(im_down.width(), im_down.height());
-//        sigma = sigma*2;
-        level++;
+        level = min(im_down.width(), im_down.height());
     }
     
     return result;
@@ -73,6 +82,7 @@ FloatImage collapse(vector<FloatImage> im_levels){
     FloatImage result(im_levels[im_levels.size()-1]), temp;
     
     for (int i = im_levels.size() - 2; i >= 0; i--) {
+        //laplacian pyramid level i + last result
         result = im_levels[i] + upsample(result, im_levels[i].width(), im_levels[i].height());
 
     }
@@ -80,6 +90,7 @@ FloatImage collapse(vector<FloatImage> im_levels){
     return result;
 }
 
+//linear downsampling
 FloatImage downsample(const FloatImage &im, float scale){
     
     int width = floor(im.width()/scale), height = floor(im.height()/scale);
@@ -120,6 +131,7 @@ FloatImage downsample(const FloatImage &im, float scale){
     return output;
 }
 
+//linear upsampling, same code from assignment6
 FloatImage upsample(const FloatImage &im, int width, int height){
     // create new FloatImage that is factor times larger than input image
     FloatImage scaledIm(width, height, im.channels());

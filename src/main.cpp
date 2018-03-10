@@ -107,7 +107,7 @@ void test_tile() {
 }
 
 void test_laplacian(){
-    const FloatImage imSrc(DATA_DIR "/input/dinosaur_lap.png");
+    const FloatImage imSrc(DATA_DIR "/input/doll_lap.png");
     const FloatImage imDes(DATA_DIR "/input/yard.jpg");
     const FloatImage mask(DATA_DIR "/input/yard_lap_mask.png");
     
@@ -148,13 +148,13 @@ void test_hdr() {
 
 int main() {
     cout << "Hello World!" << endl;
-//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
 //    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
 //    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
 //    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
 
 //    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
 //    try { test_hdr();}   catch(...) {cout << "test_tile Failed!" << endl;}
-    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
+//    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
     cout << "END" << endl;
 }
