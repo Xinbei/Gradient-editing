@@ -9,15 +9,24 @@
 using namespace std;
 
 void test_2D() {
-    const FloatImage imSrc(DATA_DIR "/input/rainbow.jpg");
-    const FloatImage imDes(DATA_DIR "/input/library.jpg");
-    const FloatImage maskSrc(DATA_DIR "/input/rainbow_mask.png");
-    const FloatImage maskDes(DATA_DIR "/input/library_mask.png");
+    const FloatImage imSrc(DATA_DIR "/input/shark.png");
+    const FloatImage imDes(DATA_DIR "/input/water.png");
+    const FloatImage maskSrc(DATA_DIR "/input/shark_mask.png");
+    const FloatImage maskDes(DATA_DIR "/input/water_mask.png");
 
     bool mix = false;
     bool log = false;
     FloatImage blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, mix, log);
-    blend.write(DATA_DIR "/output/blend_library.png");
+    blend.write(DATA_DIR "/output/blend_water.png");
+    
+    log = true;
+    blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, mix, log);
+    blend.write(DATA_DIR "/output/blend_water_log.png");
+    
+    mix = true;
+    log = false;
+    blend = Poisson_2D(imSrc, imDes, maskSrc, maskDes, mix, log);
+    blend.write(DATA_DIR "/output/blend_water_mix.png");
 }
 
 
@@ -32,16 +41,16 @@ void testTF(){
 
 void test_illu_change(){
     //local illumination change
-    const FloatImage im(DATA_DIR "/input/man_under_exposed.png");
-    const FloatImage mask(DATA_DIR "/input/man_under_exposed_mask.png");
+    const FloatImage im(DATA_DIR "/input/doll.jpg");
+    const FloatImage mask(DATA_DIR "/input/doll_mask.png");
     vector<VectorXf> b;
     
     for (int i = 0; i < 3; i++) {
-        b.push_back(getB_local_illu(log10FloatImage(im), mask, i, 0.01, 0.2));
+        b.push_back(getB_local_illu(log10FloatImage(im), mask, i, 0.05, 0.2));
     }
     
     FloatImage illu_changed = local_changes(im, mask, b);
-    illu_changed.write(DATA_DIR "/output/man_illu_change.png");
+    illu_changed.write(DATA_DIR "/output/doll_illu_change.png");
 }
 
 
