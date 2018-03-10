@@ -121,10 +121,6 @@ int main() {
 //    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
 //    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
 //    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
-<<<<<<< HEAD
-=======
-//    try { test_hdr();}   catch(...) {cout << "test_tile Failed!" << endl;}
->>>>>>> c53aaaabc9bc902d002286d7dac8604865047ef9
 //    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
     cout << "END" << endl;
 }
