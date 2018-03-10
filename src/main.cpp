@@ -27,9 +27,9 @@ void test_2D() {
 
 
 void testTF(){
-    const FloatImage im(DATA_DIR "/input/child.jpg");
-    const FloatImage mask(DATA_DIR "/input/child_mask.png");
-    FloatImage edgeIm(DATA_DIR "/input/child_edge.png");
+    const FloatImage im(DATA_DIR "/input/color-plate.png");
+    const FloatImage mask(DATA_DIR "/input/color-plate_mask.png");
+    FloatImage edgeIm(DATA_DIR "/input/color-plate_edge.png");
     
 //    cout << edgeIm.channels() << endl;
     
@@ -49,7 +49,7 @@ void testTF(){
 //    }
     
     FloatImage flattened = textureFlattening(im, mask, edgeIm);
-    flattened.write(DATA_DIR "/output/child_flattened.png");
+    flattened.write(DATA_DIR "/output/color-plate_flattened.png");
 }
 
 void test_illu_change(){
@@ -63,15 +63,15 @@ void test_illu_change(){
     }
     
     FloatImage illu_changed = local_changes(im, mask, b);
-    illu_changed.write(DATA_DIR "/output/turkey_illu_change.png");
+    illu_changed.write(DATA_DIR "/output/cat_illu_change.png");
     
     
 }
 
 void test_color_change(){
     //local color change
-    const FloatImage im(DATA_DIR "/input/tulip.jpg");
-    const FloatImage mask(DATA_DIR "/input/tulip_mask3.png");
+    const FloatImage im(DATA_DIR "/input/toy.jpg");
+    const FloatImage mask(DATA_DIR "/input/toy_mask.png");
     
     vector<VectorXf> b;
     
@@ -92,15 +92,15 @@ void test_color_change(){
     }
 
     FloatImage decolored = local_changes(im, mask, b, false);
-    decolored.write(DATA_DIR "/output/tulip_decolored.png");
+    decolored.write(DATA_DIR "/output/toy_decolored.png");
     
     //local color change
     FloatImage imSrc(im);
     
     for (int i = 0; i < im.width(); i++) {
         for (int j = 0; j < im.height(); j++) {
-            imSrc(i, j, 0) = im(i, j, 0)*0.5;
-            imSrc(i, j, 1) = im(i, j, 1)*2;
+            imSrc(i, j, 0) = im(i, j, 0)*0.2;
+            imSrc(i, j, 1) = im(i, j, 1)*0.2;
             imSrc(i, j, 2) = im(i, j, 2)*2;
         }
     }
@@ -110,7 +110,7 @@ void test_color_change(){
     }
     
     FloatImage local_color_change = local_changes(im, mask, b, false);
-    local_color_change.write(DATA_DIR "/output/tulip_color_change.png");
+    local_color_change.write(DATA_DIR "/output/toy_color_change.png");
 }
 
 void test_tile() {
@@ -165,13 +165,13 @@ void test_hdr() {
 
 int main() {
     cout << "Hello World!" << endl;
-    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
-//    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
+//    try { test_2D();}   catch(...) {cout << "test_2D Failed!" << endl;}
+    try { testTF();}   catch(...) {cout << "test_tf Failed!" << endl;}
 //    try { test_illu_change();}   catch(...) {cout << "test_ill_change Failed!" << endl;}
 //    try { test_color_change();}   catch(...) {cout << "test_color_change Failed!" << endl;}
 
 //    try { test_tile();}   catch(...) {cout << "test_tile Failed!" << endl;}
 //    try { test_hdr();}   catch(...) {cout << "test_tile Failed!" << endl;}
-    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
+//    try { test_laplacian();}   catch(...) {cout << "test_laplacian Failed!" << endl;}
     cout << "END" << endl;
 }
