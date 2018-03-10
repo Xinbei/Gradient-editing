@@ -4,10 +4,10 @@ All source images are in "/data/input/".
 
 
 Division of labor :
-1. poisson image blending (Annie)
-2. texture flattening (Xinbei)
-3. local illumination and color change (Xinbei)
-4. seamless tiling (Annie)
+1. Poisson image blending (Annie)
+2. Texture flattening (Xinbei)
+3. Local illumination and color change (Xinbei)
+4. Seamless tiling (Annie)
 5. Laplacian blend (Xinbei)
 
 
